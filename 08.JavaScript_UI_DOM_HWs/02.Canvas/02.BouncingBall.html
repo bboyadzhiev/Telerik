@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style type="text/css">
+        html, div, cavas{
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+    <p>Moves the canvas inside the div.</p>
+    <div id="fieldDiv">
+        <canvas id="ballCanvas" ></canvas>
+    </div>
+    <script type="text/javascript">
+        var fieldWidth = 140, fieldHeight = 100;
+        document.getElementById('fieldDiv').setAttribute('style', 'width:' + fieldWidth + 'px; height:' + fieldHeight + 'px; background-color:aqua')
+        
+        var ballSize = 20;
+        var x = 10, y = 15;
+        var horizontal = 1, vertical = 1;
+        var padding = 0;
+        var canvas = document.getElementById('ballCanvas');
+        var ctx = canvas.getContext('2d');
+        ctx.arc(ballSize / 2, ballSize / 2, (ballSize / 2 )- 1, 0, 2 * Math.PI);
+        //ctx.stroke();
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+     
+        // Moving the canvas works much faster than redrawing it
+        function move(horizontal, vertical) {
+            x = x + horizontal; y = y + vertical;
+            canvas.setAttribute('style', 'position: relative; top:' + y + 'px; left:' + x + 'px; width:'+ballSize+'; height:'+ballSize);
+        }
+
+        function moveBall(){
+           // var leftX = x - ballSize;
+            var rightX = x + ballSize;
+            //var topY = y - ballSize;
+            var bottomY = y + ballSize;
+
+            if (x <= padding) {
+                horizontal  = 1;
+            }
+            if (rightX >= fieldWidth - padding ) {
+                horizontal = -1;
+            }
+            if (y <= padding) {
+                vertical = 1;
+            }
+            if (bottomY >= fieldHeight - padding) {
+                vertical = -1;
+            }
+            move(horizontal, vertical);
+        }
+    
+        setInterval(function () { moveBall() }, 25);
+
+    </script>
+</body>
+</html>

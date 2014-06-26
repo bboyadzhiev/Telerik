@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaScript UI & DOM Course</title>
+    <style type="text/css">
+        .lections-table {
+            border: 1px solid black;
+            border-spacing: 0px;
+            font-family: arial, veranda;
+        }
+
+            .lections-table th {
+                border: 1px solid black;
+                padding: 2px 4px;
+                background-color: lightslategrey;
+                color: white;
+            }
+
+            .lections-table tr td {
+                border: 1px solid black;
+                padding: 2px 4px;
+            }
+
+            .lections-table tr:nth-child(2n) {
+                background-color: lightgray;
+            }
+    </style>
+</head>
+<body>
+    <div id="wrapper"></div>
+    <script type="text/x-handlebars-template" id="table-template">
+        <table class="lections-table">
+            <thead>
+                <tr>
+                    {{#headings}}
+                    <th>{{heading}}</th>
+                    {{/headings}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#lections}}
+                <tr>
+                    <td>{{number}}</td>
+                    <td>{{title}}</td>
+                    <td>{{date1}}</td>
+                    <td>{{date2}}</td>
+                </tr>
+                {{/lections}}
+            </tbody>
+        </table>
+    </script>
+    <script src="scripts/handlebars-v1.3.0.js"></script>
+    <script type="text/javascript">
+        var table = {
+            headings: [{
+                heading: "№"
+            }, {
+                heading: "Title"
+            }, {
+                heading: "Date #1"
+            }, {
+                heading: "Date #2"
+            }],
+            lections: [{
+                number: 0,
+                title: "Course Introduction",
+                date1: "Wed 18:00, 28-May-2014",
+                date2: "Thu 14:00, 29-May-2014"
+            }, {
+                number: 1,
+                title: "Documane Object Model",
+                date1: "Wed 18:00, 28-May-2014",
+                date2: "Thu 14:00, 29-May-2014"
+            }, {
+                number: 2,
+                title: "HTML5 Canvas",
+                date1: "Thu 18:00, 29-May-2014",
+                date2: "Fri 14:00, 30-May-2014"
+            }, {
+                number: 3,
+                title: "KineticJS Overview",
+                date1: "Thu 18:00, 29-May-2014",
+                date2: "Fri 14:00, 30-May-2014"
+            }, {
+                number: 4,
+                title: "SVG and RaphaelJS",
+                date1: "Wed 18:00, 04-Jun-2014",
+                date2: "Thu 14:00, 05-Jun-2014"
+            }, {
+                number: 5,
+                title: "Animations with Canvas and SVG",
+                date1: "Wed 18:00, 04-Jun-2014",
+                date2: "Thu 14:00, 05-Jun-2014"
+            }, {
+                number: 6,
+                title: "DOM operations",
+                date1: "Thu 18:00, 05-Jun-2014",
+                date2: "Fri 14:00, 06-Jun-2014"
+            }, {
+                number: 7,
+                title: "Event model",
+                date1: "Thu 18:00, 05-Jun-2014",
+                date2: "Fri 14:00, 06-Jun-2014"
+            }, {
+                number: 8,
+                title: "jQuery overview",
+                date1: "Wed 18:00, 11-Jun-2014",
+                date2: "Thu 14:00, 12-Jun-2014"
+            }, {
+                number: 9,
+                title: "HTML templates",
+                date1: "Wed 18:00, 11-Jun-2014",
+                date2: "Thu 14:00, 12-Jun-2014"
+            }, {
+                number: 10,
+                title: "Exam preparation",
+                date1: "Thu 18:00, 12-Jun-2014",
+                date2: "Fri 14:00, 13-Jun-2014"
+            }, {
+                number: 11,
+                title: "Exam",
+                date1: "Tue 10:00, 17-Jun-2014",
+                date2: "Tue 16:30, 17-Jun-2014"
+            }, {
+                number: 12,
+                title: "Teamwork Defense",
+                date1: "Thu 10:00, 19-Jun-2014",
+                date2: "Thu 10:00, 19-Jun-2014"
+            }]
+        };
+
+        var tableTemplateHTML = document.getElementById('table-template').innerHTML;
+        var tableTemplate = Handlebars.compile(tableTemplateHTML);
+        document.getElementById('wrapper').innerHTML = tableTemplate(table);
+    </script>
+</body>
+</html>

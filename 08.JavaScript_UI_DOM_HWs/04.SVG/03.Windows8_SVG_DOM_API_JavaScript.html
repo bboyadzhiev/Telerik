@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <svg id="svgElement" width="1680" height="800"></svg>   
+        <script type="text/javascript">
+            const barsWidth = 131;
+            const barsHeight = 131;
+            const barsSpace = 10;
+            const textSideOffest = 18;
+            const textBottomOffest = 8;
+            const barTextSize = 14;
+            const barFontFamily = 'Segoe UI';
+
+            function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+                var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            }
+
+            function describeArc(x, y, radius, startAngle, endAngle) {
+
+                var start = polarToCartesian(x, y, radius, endAngle);
+                var end = polarToCartesian(x, y, radius, startAngle);
+                var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+
+                var d = [
+                    "M", start.x, start.y,
+                    "A", radius, radius, 0, arcSweep, 0, end.x, end.y
+                ].join(" ");
+
+                return d;
+            }
+            var currentDate = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            var currentDay = weekday[currentDate.getDay()];
+
+            var svgNameSpace = 'http://www.w3.org/2000/svg';
+            var svg = document.getElementById('svgElement');
+
+            function createRect(x, y, width, height, fill, stroke, sw) {
+                var rect;
+                rect = document.createElementNS(svgNameSpace, 'rect');
+                rect.setAttribute('x', x);
+                rect.setAttribute('y', y);
+                rect.setAttribute('width', width);
+                rect.setAttribute('height', height);
+                rect.setAttribute('fill', fill);
+                rect.setAttribute('stroke', stroke);
+                rect.setAttribute('stroke-width', sw);
+                return rect;
+            }
+
+            function createPath(points, fill, stroke, sw) {
+                var path;
+                path = document.createElementNS(svgNameSpace, 'path');
+                path.setAttribute('d', points);
+                path.setAttribute('fill', fill);
+                path.setAttribute('stroke', stroke);
+                path.setAttribute('stroke-width', sw);
+                return path;
+            }
+
+            function createCircle(x, y, r, fill, stroke, sw) {
+                var circle;
+                circle = document.createElementNS(svgNameSpace, 'circle');
+                circle.setAttribute('cx', x);
+                circle.setAttribute('cy', y);
+                circle.setAttribute('r', r);
+                circle.setAttribute('fill', fill);
+                circle.setAttribute('stroke', stroke);
+                circle.setAttribute('stroke-width', sw);
+                return circle;
+            }
+
+            function createText(x, y, content, size, fill, stroke, sw, ff) {
+                var text = document.createElementNS(svgNameSpace, 'text');
+                text.setAttribute('font-family', ff);
+                text.setAttribute('x', x);
+                text.setAttribute('y', y);
+                text.setAttribute('font-size', size);
+                text.textContent = content;
+                text.setAttribute('fill', fill);
+                text.setAttribute('stroke', stroke);
+                text.setAttribute('stroke-width', sw);
+                return text;
+            }
+
+            function createImage(x, y, width, height, link) {
+                var image = document.createElementNS(svgNameSpace, 'image');
+                image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', link);
+                image.setAttribute('x', x);
+                image.setAttribute('y', y);
+                image.setAttribute('width', width + 'px');
+                image.setAttribute('height', height + 'px');
+                return image;
+            }
+
+            function drawSVGGroup(group, groupX, groupY, svgElement) {
+                //Iretarion over tiles
+                for (var i = 0; i < group.length; i++) {
+                    // tile placement
+                    var spacerX = barsSpace, spacerY = barsSpace;
+                    if (group[i].col == 0) {
+                        spacerX = 0;
+                    }
+                    if (group[i].row == 0) {
+                        spacerY = 0;
+                    }
+
+                    var x = groupX + group[i].col * barsWidth + group[i].col * spacerX;
+                    var y = groupY + group[i].row * barsHeight + group[i].row * spacerY;
+                    var bar = createRect(x, y, group[i].width, group[i].height, group[i].background, '#000000', 0
+                        )
+                    svgElement.appendChild(bar);
+
+
+                    // icon graphics
+                    for (var j = 0; j < group[i].graphics.length; j++) {
+                        var dims = group[i].graphics[j].definition.split(" ");
+                        var figure;
+                        switch (group[i].graphics[j].type) {
+                            case 'rect': figure = createRect(dims[0], dims[1], dims[2], dims[3], group[i].graphics[j].fill, group[i].graphics[j].stroke, group[i].graphics[j].sw); break;
+                            case 'circle': figure = createCircle(dims[0], dims[1], dims[2], group[i].graphics[j].fill, group[i].graphics[j].stroke, group[i].graphics[j].sw); break;
+                            case 'path':
+                                figure = createPath(group[i].graphics[j].definition, group[i].graphics[j].fill, group[i].graphics[j].stroke, group[i].graphics[j].sw);
+                                break;
+                            case 'text': figure = createText(dims[0], dims[1], group[i].graphics[j].content, group[i].graphics[j].size, group[i].graphics[j].fill, group[i].graphics[j].stroke, group[i].graphics[j].sw, group[i].graphics[j].fontfamily); break;
+                            case 'image': figure = createImage(dims[0], dims[1], dims[2], dims[3], group[i].graphics[j].link); break;
+                        }
+                        if (group[i].graphics[j].transform) {
+                            figure.setAttribute('transform', 'translate(' + x + ', ' + y + ') ' + group[i].graphics[j].transform);
+                        } else {
+                            figure.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+                        }
+
+                        svgElement.appendChild(figure);
+                    }
+
+
+                    // description text
+                    var description;
+                    if (group[i].textAtLeft) {
+                        description = createText(x + textSideOffest, y + barsHeight - textBottomOffest, group[i].text, barTextSize, '#ffffff', 'none', 0, barFontFamily);
+                    } else {
+                        description = createText(x + group[i].width - textSideOffest, y + barsHeight - textBottomOffest, group[i].text, barTextSize, '#ffffff', 'none', 0, barFontFamily);
+                    }
+                    svgElement.appendChild(description);
+
+                }
+            }
+
+            // Tiles description arrays
+            // First group
+            var group1 = [{
+                width: 131,
+                height: 131,
+                row: 0,
+                col: 0,
+                labeled: true,
+                text: 'Store',
+                textAtLeft: true,
+                background: '#2F86EF',
+                graphics: [{ // Tiles internal graphics data
+                    type: 'path',
+                    definition: 'M 45 45 L 42 85 L 53 92 L 92 86 L 85 45 H 52 V 51 L 48 45 Z',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'path',
+                    definition: 'M 61 41 V 31 M 77 41 V 31',
+                    fill: 'none',
+                    stroke: 'white',
+                    sw: 2
+                }, {
+                    type: 'path',
+                    definition: describeArc(69, 31, 8, 270, 90),
+                    fill: 'none',
+                    stroke: 'white',
+                    sw: 2
+                }, {
+                    type: 'path',
+                    definition: 'M 56 41 V 32 M 72 41 V 32',
+                    fill: 'none',
+                    stroke: 'white',
+                    sw: 2
+                }, {
+                    type: 'path',
+                    definition: describeArc(64, 33, 8, 270, 330),
+                    fill: 'none',
+                    stroke: 'white',
+                    sw: 2
+                }, {
+                    type: 'path',
+                    definition: describeArc(64, 33, 8, 25, 90),
+                    fill: 'none',
+                    stroke: 'white',
+                    sw: 2
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 0,
+                col: 1,
+                labeled: true,
+                text: 'XBox LIVE Games',
+                textAtLeft: true,
+                background: '#6CB71F',
+                graphics: [{
+                    type: 'path',
+                    definition: 'M 0 0 c 42 -100 68 -16 105 -15 l 54 -1 c 39 0 64 -89 105 12 q 96 236 -73 108 l-111 -1 q -167 127 -80 -103 Z',
+                    fill: '#ffffff',
+                    stroke: 'white',
+                    sw: 0,
+                    transform: 'matrix(0.23, 0, 0, 0.23, 35, 45)'
+                }, {
+                    type: 'circle',
+                    definition: '65 50 5', // x y r
+                    fill: '#6CB71F',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 0,
+                col: 2,
+                labeled: true,
+                text: 'Photos',
+                textAtLeft: true,
+                background: '#BD1D49',
+                graphics: [{
+                    type: 'rect',
+                    definition: '107 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'rect',
+                    definition: '112 36 50 45',// x y w h
+                    fill: '#BD1D49',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'circle',
+                    definition: '138 53 9', // x y r
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'path',
+                    definition: 'M -50 0 q 28 -115 130 -42 q 36 28 82 -20 q 29 -47 56 11 l 23 50 Z', // x y r
+                    fill: '#ffffff',
+                    stroke: 'none',
+                    sw: 0,
+                    transform: 'matrix(0.133363, 0, 0, 0.133363, 124.996, 76.442)'
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 0,
+                col: 4,
+                labeled: true,
+                text: 'Calendar',
+                textAtLeft: true,
+                background: '#009418',
+                graphics: [{
+                    type: 'text',
+                    content: currentDay, // ;-)
+                    definition: '180 90', 
+                    size: barTextSize,
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0,
+                    fontfamily: 'Segoe UI'
+                }, {
+                    type: 'text',
+                    content: currentDate.getDate(), // ;-)
+                    definition: '180 70', 
+                    size: 60,
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0,
+                    fontfamily: 'Segoe UI Light'
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 1,
+                col: 0,
+                labeled: true,
+                text: 'Maps',
+                textAtLeft: true,
+                background: '#613CBD',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 1,
+                col: 1,
+                labeled: true,
+                text: 'Internet Explorer',
+                textAtLeft: true,
+                background: '#2F86EF',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 1,
+                col: 2,
+                labeled: true,
+                text: 'Messaging',
+                textAtLeft: true,
+                background: '#613CBD',
+                graphics: [{
+                    type: 'rect',
+                    definition: '100 32 80 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'text',
+                    content: ':-)',
+                    definition: '120 70',
+                    size: 40,
+                    fill: '#613CBD',
+                    stroke: 'none',
+                    sw: 0,
+                    fontfamily: 'Segoe UI Bold'
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 1,
+                col: 4,
+                labeled: true,
+                text: ' ',
+                textAtLeft: true,
+                background: '#DB562D',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 2,
+                col: 0,
+                labeled: true,
+                text: 'Video',
+                textAtLeft: true,
+                background: '#DB562D',
+                graphics: [{
+                    type: 'rect',
+                    definition: '100 30 71 47',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'rect',
+                    definition: '107 34 57 38',
+                    fill: '#DB562D',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'path',
+                    definition: 'M 127 43 L 127 63 L 143 53 Z',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 2,
+                col: 2,
+                labeled: true,
+                text: '3',
+                textAtLeft: false,
+                background: '#009418',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 2,
+                col: 4,
+                labeled: true,
+                text: 'Pinball FX2',
+                textAtLeft: true,
+                background: '#000000',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 2,
+                col: 5,
+                labeled: true,
+                text: 'Solitaire',
+                textAtLeft: true,
+                background: '#2F86EF',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 3,
+                col: 0,
+                labeled: true,
+                text: 'Desktop',
+                textAtLeft: true,
+                background: '#2F86EF',
+                graphics: [{
+                    type: 'image',
+                    definition: '0 0 272 131',
+                    link: 'fish2.jpg'
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 3,
+                col: 2,
+                labeled: true,
+                text: 'Weather',
+                textAtLeft: true,
+                background: '#2F86EF',
+                graphics: [{
+                    type: 'circle',
+                    definition: '136 60 15', // x y r
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }, {
+                    type: 'circle',
+                    definition: '136 60 20', // x y r
+                    fill: 'none',
+                    stroke: 'white',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 3,
+                col: 4,
+                labeled: true,
+                text: 'Camera',
+                textAtLeft: true,
+                background: '#BD1D49',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 3,
+                col: 5,
+                labeled: true,
+                text: 'Xbox Companion',
+                textAtLeft: true,
+                background: '#6CB71F',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }
+            ];
+
+            // Tiles, group 2 (Right)
+            var group2 = [{
+                width: 272,
+                height: 131,
+                row: 0,
+                col: 0,
+                labeled: true,
+                text: 'Music',
+                textAtLeft: true,
+                background: '#613CBD',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 1,
+                col: 0,
+                labeled: true,
+                text: 'Calendar',
+                textAtLeft: true,
+                background: '#009418',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 2,
+                col: 0,
+                labeled: true,
+                text: 'Reader',
+                textAtLeft: true,
+                background: '#DB562D',
+                graphics: [{
+                    type: 'rect',
+                    definition: '32 32 60 60',
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0
+                }]
+            }, {
+                width: 131,
+                height: 131,
+                row: 2,
+                col: 1,
+                labeled: true,
+                text: ' ',
+                textAtLeft: true,
+                background: '#002768',
+                graphics: [{
+                    type: 'text',
+                    content: 'Windows',
+                    definition: textSideOffest + ' ' + textSideOffest * 2, // x y
+                    size: 20,
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0,
+                    fontfamily: 'Segoe UI Light'
+                }, {
+                    type: 'text',
+                    content: 'Explorer',
+                    definition: textSideOffest + ' ' + textSideOffest * 3, // x y
+                    size: 20,
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0,
+                    fontfamily: 'Segoe UI Light'
+                }]
+            }, {
+                width: 272,
+                height: 131,
+                row: 3,
+                col: 0,
+                labeled: true,
+                text: ' ',
+                textAtLeft: true,
+                background: '#000000',
+                graphics: [{
+                    type: 'text',
+                    content: 'And so on...',
+                    definition: textSideOffest + ' ' + 50, // x y
+                    size: 40,
+                    fill: 'white',
+                    stroke: 'none',
+                    sw: 0,
+                    fontfamily: 'Segoe UI Light'
+                }]
+            }, ];
+
+            var background = createRect(0, 0, 1680, 800, '#001941', 'none', 0);
+            var start = createText(137, 115, 'Start', 60, '#B4C2DD', 'none', 'none', 'Segoe UI Light');
+
+            svg.appendChild(background);
+            svg.appendChild(start);
+
+            drawSVGGroup(group1, 137, 208, svg);
+            drawSVGGroup(group2, 1033, 208, svg);
+           
+        </script>
+</body>
+</html>

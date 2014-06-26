@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src='scripts/raphael-min.js'></script>
+    <style type="text/css">
+        body {
+            background-color: black;
+        }
+    </style>
+    <title>Archimedean Spiral</title>
+</head>
+<body>
+   
+    <script type="text/javascript">
+
+        const R_WIDTH = 364;
+        const COILS = 4.5;
+        const RADIUS = 190;
+        const ROTATION = 0.5 * Math.PI;
+
+        var backGround = Raphael(10, 10, R_WIDTH + 10, R_WIDTH + 10);
+        backGround.rect(10, 10, R_WIDTH - 10, R_WIDTH - 10, 10)
+           .attr({ 'stroke': '#DAEDF2' })
+           .attr({ 'stroke-width': 5 })
+           .attr({ "fill": "#ffffff" });
+
+        var spiralField = Raphael(5, 10,  R_WIDTH , R_WIDTH );
+        spiralField.setStart();
+
+        // value of theta corresponding to end of last coil
+        var thetaMax = COILS * 2 * Math.PI;
+
+        // How far to step away from center for each side.
+        var awayStep = RADIUS / thetaMax;
+
+        // distance between points to plot
+        var chord = 0.5;
+
+        // calculate the center
+        var centerX = R_WIDTH / 2, centerY = R_WIDTH / 2;
+
+        // For every side, step around and away from center.
+        // start at the angle corresponding to a distance of chord
+        // away from centre.
+        for (var theta = chord / awayStep; theta <= thetaMax;) {
+            //
+            // How far away from center
+            var away = awayStep * theta;
+            //
+            // How far around the center.
+            var around = theta + ROTATION;
+            //
+            // Convert 'around' and 'away' to X and Y.
+            var x = centerX - Math.cos(around) * away;
+            var y = centerY + Math.sin(around) * away;
+
+            // Now that its known, place a dot.
+            var dot = spiralField.circle(x, y, 0.4);
+
+            // to a first approximation, the points are on a circle
+            // so the angle between them is chord/radius
+            // take theta2 = theta + delta and use average value of away
+            // away2 = away + awayStep * delta 
+            // delta = 2 * chord / ( away + away2 )
+            // delta = 2 * chord / ( 2*away + awayStep * delta )
+            // ( 2*away + awayStep * delta ) * delta = 2 * chord 
+            // awayStep * delta ** 2 + 2*away * delta - 2 * chord = 0
+            // plug into quadratic formula
+            // a= awayStep; b = 2*away; c = -2*chord
+            var delta = (-2 * away + Math.sqrt(4 * away * away + 8 * awayStep * chord)) / (2 * awayStep);
+
+            theta += delta;
+        }
+
+        var set = spiralField.setFinish();
+        set.attr({ 'stroke': '#000000' })
+           .attr({ 'stroke-width': 0.5 });
+    </script>
+</body>
+</html>

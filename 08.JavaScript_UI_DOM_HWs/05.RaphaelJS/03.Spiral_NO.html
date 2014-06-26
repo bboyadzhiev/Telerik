@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <canvas id="tags" width="1200" height="600"></canvas>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var c = document.getElementById('tags');
+            var context = c.getContext("2d");
+            var halfx = context.canvas.width / 2;
+            var halfy = context.canvas.height / 2;
+
+
+            context.clearRect(0, 0, 300, 300);
+
+            //context.moveTo(halfx, halfy);
+            context.beginPath();
+            //check if both the max X and Y edges have been reached
+            var Xmaxxed = false, Ymaxxed = false;
+            var i = 0;
+            while (!Xmaxxed || !Ymaxxed) {
+                var x = i  * Math.cos(i);
+                var y = i * Math.sin(i);
+                x = x + 600;
+                y = y + 300;
+                if (x >= c.width) {
+                    Xmaxxed = true;
+                    console.log(["xMaxxed", x, y]);
+                }
+                if (y >= c.height) {
+                    Ymaxxed = true;
+                    console.log(["yMaxxed", x, y]);
+                }
+                console.log(["Attempt " + i, x, y]);
+                context.moveTo(x, y);
+                context.arc(x, y, 1, 0, 360);
+                i += 1;
+            }
+            //context.strokeStyle = "#000";
+            context.stroke();
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style type="text/css">
+        div {
+            margin-left: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        function getDivsBySelectorAll() {
+            var di = document.querySelectorAll('div > div:first-child');
+            for (var i = 0; i < di.length; i++) {
+                di[i].innerHTML += '<span>-by ALL-</span>';
+            }
+        }
+
+        function getDivsByTagName() {
+            var tagged = document.getElementsByTagName('div');
+            for (var i = 0; i < tagged.length; i++) {
+                var child = tagged[i].getElementsByTagName('div');
+                console.log(child[0]);
+                 	if(child.length == 1){
+                 		if (child[0].tagName.toLowerCase() == tagged[i].tagName.toLowerCase()) {
+                 		    child[0].innerHTML += '<span>-by Tag-</span>';
+                 		}
+                 	}
+            }
+        }
+
+        function go() {
+            getDivsBySelectorAll();
+            getDivsByTagName();
+        }
+
+        function printTextBoxValue() {
+            var tb = document.getElementById('textbox');
+            console.log(tb.value);
+        }
+
+        function paintBackground() {
+            var color = document.getElementById('colorPicker').value;
+            document.body.style.background = color;
+        }
+
+    </script>
+
+    <title>Document Object Model</title>
+</head>
+<body onload="go()">
+    <p>Task 1</p>
+    <div>
+        <span>Div 1</span>
+        <div>
+            <span>Div 1.1</span>
+        </div>
+        <div>
+            <span>Div 1.2</span>
+            <div>
+                <span>Div 1.2.1</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <span>Div directly in Div</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <span>Div 2</span>
+        <div>
+            <div>
+                <span>Div directly in Div</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p>Task 2</p>
+    <input type="text" id="textbox" onchange="printTextBoxValue()" />
+
+    <hr>
+    <p>Task 3</p>
+    <input type="color" id="colorPicker" onchange="paintBackground()" />
+</body>
+</html>

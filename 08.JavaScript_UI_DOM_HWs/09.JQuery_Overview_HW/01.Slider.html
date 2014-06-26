@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jQuery Slider</title>
+    <style type="text/css">
+        .gallery-item.visible {
+            display: block;
+        }
+
+        .gallery-item {
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+            display: none;
+        }
+    </style>
+    <script src="scripts/jquery-2.1.1.js"></script>
+</head>
+<body>
+    <div id="galleryDiv">
+        <div class="gallery-item"><h1>Item 1</h1></div>
+        <div class="gallery-item">
+            <h2>Item 2</h2>
+            <span> Lorem ipsum dollor amet</span>
+        </div>
+        <div class="gallery-item"><div><h1>Item 3</h1></div></div>
+        <div class="gallery-item"><h1>Item 4</h1></div>
+        <div class="gallery-item"><h1>Item 5</h1></div>
+        <div class="gallery-item"><h1>Item 6</h1></div>
+        <div class="gallery-controls">
+            <input type="button" id="prevButton" value="Previous" />
+            <input type="button" id="nextButton" value="Next" />
+        </div>
+    </div>
+    <script src="scripts/slider.js"></script>
+</body>
+</html>

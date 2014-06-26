@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="scripts/kinetic-v5.1.0.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <script type="text/javascript">
+        var stage = new Kinetic.Stage({
+            container: 'canvas-container',
+            width: 1000,
+            height: 600
+        });
+
+        var familyMembers = [{
+            mother: 'Teodora Stefnova',
+            father: 'Peter Stefanov',
+            children: ['DeeDee Stefanova']
+        }, {
+            mother: 'Maria Petrova',
+            father: 'Georgi Petrov',
+            children: ['Teodora Stefnova']
+        }, {
+            mother: 'Petra Stamatova',
+            father: 'Todor Stamatov',
+            children: ['Maria Petrova']
+        }, {
+            mother: 'Neli Stamatova',
+            father: 'Georgi Stamatov',
+            children: ['asdasd','Todor Stamatov']
+        }]
+
+        var drawing = [];
+
+        var memberWidth = 200, memberHeight = 50;
+        //var x = memberWidth / 2, y = memberHeight / 2; //starting coords
+        var x = 0, y = 0; //starting coords
+        var marginLeft = 1.5 * memberWidth; // points to the left
+        var marginTop = 2 * memberHeight;
+
+        var layer = new Kinetic.Layer();
+        stage.add(layer);
+
+        function drawMember(xCoord, yCoord, named) {
+            var shortName = named.replace(" ", "");
+            var grp = new Kinetic.Group({
+                id: shortName,
+                name: shortName
+            });
+            var rect = new Kinetic.Rect({
+                fill: 'yellowgreen',
+                stroke: '#CCCCCC',
+               // name : 'rectangle',
+                x: xCoord,
+                y: yCoord,
+                width: memberWidth,
+                height: memberHeight
+            });
+            var text = new Kinetic.Text({
+                x: xCoord,
+                y: yCoord,
+                text: named,
+                fontSize: 30,
+                fontFamily: 'Calibri',
+                fill: 'red'
+            });
+            grp.add(rect);
+            grp.add(text);
+            layer.add(grp);
+            layer.draw();
+            
+        }
+
+        function drawConnection(parentName, childName) {
+            var parent = stage.get('.' + parentName.replace(" ", ""));
+            var child = stage.get('.' + childName.replace(" ", ""));
+            var p = { x: parent[0].children[0].attrs.x + 0.5 * memberWidth, y: parent[0].children[0].attrs.y};
+            var c = { x: child[0].children[0].attrs.x + 0.5 * memberWidth, y: child[0].children[0].attrs.y };
+
+            console.log(parent);
+            var line = new Kinetic.Line({
+                x: 0,
+                y: 0,
+                points: [p.x, p.y, c.x, c.y],
+                stroke: 'red',
+                tension: 1
+            });
+            layer.add(line);
+            line.moveToBottom();
+            //layer.moveToBottom();
+            layer.draw();
+        }
+
+        // така и не успях да се докопам до координатите на обектите в layer-а !!!!
+        // идеята беше ако даден родител се открие като дете на прародител (вече изчертано) да се трие 
+        // и новите родители и деца д се изчертават спрямо тези координати
+        function drawFamilyTree() {
+            for (var i = familyMembers.length - 1; i >= 0; i--) {
+
+               if (i < familyMembers.length - 1) {
+               // if (false) {
+                    if (familyMembers[i + 1].children.length == 2) {
+                        if (familyMembers[i].father == familyMembers[i + 1].children[1]) {
+                            // father is someones's child
+                            var name = familyMembers[i].father;
+                            name = name.replace(" ", "");
+                            var fatherGroup = stage.get('.' + name);
+                            var fgX = fatherGroup[0].children[0].attrs.x;
+                            var fgY = fatherGroup[0].children[0].attrs.y;
+                            x = fgX;
+                            y = fgY;
+                            var offset = x - marginLeft / 2;
+                            if (offset < 0) {
+                               layer.setOffsetX(Math.abs(offset) + x);
+
+                            }
+                         //fatherGroup.destroy();    
+                        }
+                    }
+
+
+                    if (familyMembers[i].mother == familyMembers[i + 1].children[0]) {
+                        // mother is someones's child
+                        var name = familyMembers[i].mother;
+                        name = name.replace(" ", "");
+                        var motherGroup = stage.get('.' + name);
+                        var mgX = motherGroup[0].children[0].attrs.x;
+                        var mgY = motherGroup[0].children[0].attrs.y;
+                        x = mgX - marginLeft;
+                        y = mgY;
+                        var offset = x - marginLeft / 2;
+                        if (offset < 0) {
+
+                            layer.setOffsetX(offset);
+
+                        }
+                        console.log(offset);
+                    }
+                }
+
+                
+
+                drawMember(x, y, familyMembers[i].father);
+                drawMember(x + marginLeft, y, familyMembers[i].mother);
+                y += marginTop;
+
+                drawMember(x + marginLeft / 2, y, familyMembers[i].children[0]);
+                drawConnection(familyMembers[i].father, familyMembers[i].children[0]);
+                drawConnection(familyMembers[i].mother, familyMembers[i].children[0]);
+
+                if (familyMembers[i].children.length == 2) {  
+                    drawMember(x - marginLeft / 2, y, familyMembers[i].children[1]);
+                    drawConnection(familyMembers[i].father, familyMembers[i].children[1]);
+                    drawConnection(familyMembers[i].mother, familyMembers[i].children[1]);
+                    var offset = x - marginLeft / 2;
+                    if (offset < 0) {
+                        layer.setOffsetX(offset);
+                    }
+                    console.log(x);
+                    console.log(offset);
+                }
+
+               
+            }
+        }
+
+        drawFamilyTree();
+        layer.draw();
+    </script>
+</body>
+</html>

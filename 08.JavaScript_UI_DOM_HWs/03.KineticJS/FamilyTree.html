@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="scripts/kinetic-v5.1.0.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <script type="text/javascript">
+        var stage = new Kinetic.Stage({
+            container: 'canvas-container',
+            width: 450,
+            height: 350
+        });
+        var familyMembers = [{
+            mother: 'Maria Petrova',
+            father: 'Georgi Petrov',
+            children: ['Teodora Petrova','Peter Petrov']
+        }, {
+            mother: 'Petra Stamatova',
+            father: 'Todor Stamatov',
+            children: ['Maria Petrova']
+        }]
+
+        var memberWidth = 100, memberHeight = 30;
+        //var x = memberWidth / 2, y = memberHeight / 2; //starting coords
+        var x = 0, y = 0; //starting coords
+        var marginLeft = 2 * memberWidth; // points to the left
+        var marginTop = 2 * memberHeight;
+
+        function checkParency(child, gen) {
+            if (child == familyMembers[gen].father) {
+                expandCanvas(marginLeft, marginTop);
+            }
+        }
+
+        // assuming one family tree, all part of the family, youngest are familyMembers[0], eldest are familyMembers[length]
+        // only one sister and one brother in last generation; sister first, brother second
+        // for(i) family members 
+        //  for(j) children {
+                if (i > 0) {
+                    //     check if parent(familyMembers[i].children[j], i-1) and if so re-calculate x and y
+                }
+        //     draw daughter at pos=x, than if (brother) {
+        //                          expandCanvas(2*marginLeft, 0); // re-calculate x
+        //                          to the left draw  brother pos=x-marginLeft
+        //                      }
+        //      expandCanvas(2*marginLeft, marginTop)
+        //      y = y - marginTop
+        //     draw mother in top at x=(x - (x-marginLeft))/2, than to the left draw fahter x - marginLeft
+        // }
+
+        for (var i = 0; i < familyMembers.length; i++) {
+            for (var j = 0; j < familyMembers[i].children.length; j++) {
+
+            }
+        }
+
+    </script>
+</body>
+</html>

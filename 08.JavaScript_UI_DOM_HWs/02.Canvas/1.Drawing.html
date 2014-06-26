@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<canvas id="manDrawing" width="300" height="300"></canvas>
+<canvas id="bicycleDrawing" width="300" height="300"></canvas>
+<script type="text/javascript">
+
+    function ctxbg(ctx, bg) {
+        ctx.save();
+        ctx.fillStyle = bg;
+        ctx.beginPath();
+        ctx.moveTo(0, 0); ctx.lineTo(300, 0); ctx.lineTo(300, 300); ctx.lineTo(0, 300);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawMan() {
+        var canvas = document.getElementById('manDrawing');
+        var ctx = canvas.getContext('2d');
+        var x = 150;
+        var y = 200;
+        var faceFillColor = 'skyblue';
+        var faceStrokeColor = "#258dc8";
+        var hatColor = 'blue', hatStroke = 'black';
+        var coef = Math.PI / 180;
+        // ctx.beginPath();
+        //ctx.moveTo(0, 0); ctx.lineTo(300, 0); ctx.lineTo(300, 300); ctx.lineTo(0, 300);
+        //ctx.fill();
+
+        ctx.lineWidth = 3;
+        ctx.fillStyle = faceFillColor;
+        ctx.strokeStyle = faceStrokeColor;
+        ctxbg(ctx, 'black');
+
+        // head
+        ctx.save();
+        ctx.beginPath();
+        ctx.scale(1, 0.8);
+        ctx.arc(x, y, 60, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+
+        // mouth
+        ctx.save();
+        ctx.beginPath();
+        ctx.rotate(7 * coef);
+        ctx.scale(1, 0.3);
+        ctx.arc(x + 5, y + 350, 25, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+        // eyes
+        ctx.save();
+        ctx.beginPath();
+        ctx.scale(1, 0.7);
+        ctx.arc(x + 15, y + 10, 10, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(x - 30, y + 10, 10, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+
+        // iris
+        ctx.save();
+        ctx.beginPath();
+        ctx.scale(0.5, 1);
+        ctx.arc(x + 82, y - 53, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(x + 171, y - 53, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+
+        // nose
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(x - 7, y - 60);
+        ctx.lineTo(x - 17, y - 35);
+        ctx.lineTo(x - 7, y - 35);
+        ctx.stroke();
+        ctx.restore();
+
+        //hat
+        ctx.fillStyle = hatColor;
+        ctx.strokeStyle = hatStroke;
+
+        //base
+        ctx.save();
+        ctx.beginPath();
+        ctx.scale(1, 0.2);
+        ctx.arc(x, y + 400, 60, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+
+        x = x + 5;
+        //cylinder
+        ctx.save();
+        ctx.beginPath();
+        ctx.scale(1, 0.3);
+        ctx.arc(x, y + 170, 30, 2 * Math.PI, Math.PI);
+        ctx.lineTo(x - 30, y - 20);
+        ctx.lineTo(x + 30, y - 20);
+        ctx.lineTo(x + 30, y + 170);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(x, y - 20, 30, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    function drawBicycle() {
+        var canvas = document.getElementById('bicycleDrawing');
+        var ctx = canvas.getContext('2d');
+        var tyresFillColor = 'skyblue';
+        var tyresStrokeColor = "#258dc8";
+
+        var rtc = {
+            x: 60,
+            y: 150
+        };
+        var ftc = {
+            x: rtc.x + 180,//240,
+            y: rtc.y
+        };
+
+        var gear = {
+            x: rtc.x + 80,//240,
+            y: rtc.y
+        };
+
+        var seat = {
+            x: rtc.x + 40,
+            y: rtc.y - 80
+        };
+
+        var frameTop = {
+            x1: rtc.x + 48,
+            x2: ftc.x - 5,
+            y1: rtc.y - 60,
+            y2: ftc.y - 60
+        };
+
+        var handleBar = {
+            x: frameTop.x2,
+            y: frameTop.y2 - 30
+        };
+
+        ctx.lineWidth = 2;
+        ctx.fillStyle = tyresFillColor;
+        ctx.strokeStyle = tyresStrokeColor;
+        ctxbg(ctx,'black');
+
+        //wheels
+        ctx.beginPath();
+        ctx.arc(rtc.x, rtc.y, 45, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.arc(ftc.x, ftc.y, 45, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        //pedals
+        ctx.beginPath();
+        ctx.moveTo(gear.x - 17, gear.y - 20);
+        ctx.lineTo(gear.x + 17, gear.y + 20);
+        ctx.stroke();
+        ctx.closePath();
+
+        //gear
+        ctx.beginPath();
+        ctx.arc(gear.x, gear.y, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        //seat
+        ctx.beginPath();
+        ctx.moveTo(gear.x, gear.y);
+        ctx.lineTo(seat.x, seat.y);
+        ctx.moveTo(seat.x - 20, seat.y);
+        ctx.lineTo(seat.x + 20, seat.y);
+        //frame
+        ctx.moveTo(rtc.x, rtc.y);
+        ctx.lineTo(frameTop.x1, frameTop.y1);
+        ctx.lineTo(frameTop.x2, frameTop.y2);
+        ctx.lineTo(gear.x, gear.y);
+        ctx.lineTo(rtc.x, rtc.y);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(ftc.x, ftc.y);
+        ctx.lineTo(handleBar.x, handleBar.y);
+        ctx.lineTo(handleBar.x - 35, handleBar.y + 8);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(handleBar.x, handleBar.y);
+        ctx.lineTo(handleBar.x + 20, handleBar.y-25);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    drawMan();
+    drawBicycle();
+</script>
+</body>
+</html>

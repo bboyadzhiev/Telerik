@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script src="scripts/jquery-2.1.1.js"></script>
+    <script src="scripts/messageBox.js"></script>
+</head>
+<body>
+    <div id="messageBox">
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var msgBox = $('#messageBox').messageBox()
+            //msgBox.success('Success!');
+            msgBox.error('Error!');
+
+            
+            
+        });
+    </script>
+</body>
+</html>

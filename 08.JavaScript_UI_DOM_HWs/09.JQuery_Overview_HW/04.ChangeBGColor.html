@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Change Page Background Color</title>
+    <script src="scripts/jquery-2.1.1.js"></script>
+</head>
+<body>
+    <p>Choose Page Background Color</p>
+    <input type="color" id="colorPicker"/>
+
+    <script type="text/javascript">
+        $('#colorPicker').on('change', function () {
+            $('body').attr('style', 'background-color: ' + $(this).val());
+        });
+    </script>
+</body>
+</html>
