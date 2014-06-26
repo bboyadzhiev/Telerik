@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaScript Functions</title>
+    <script src="Functions.js" onerror="alert('Error with script!')"></script>
+</head>
+<body>
+    <h2>
+        1. Write a function that returns the last digit of given integer as an English word. 
+    </h2>
+    Enter integer number: <input type="text" id="int11TB">
+    <input type="button" onclick="toEnglishString(document.getElementById('int11TB').value)" value="Calculate">
+    
+    <h2>
+        2. Write a function that reverses the digits of given decimal number.
+    </h2>
+    Enter decimal number: <input type="text" id="taskTwoDecimalTB">
+    <input type="button" onclick="reverseDecimal(document.getElementById('taskTwoDecimalTB').value)" value="Calculate">
+
+    <h2>
+        3. Write a function that finds all the occurrences of word in a text
+    </h2>    
+        <ul>
+            <li>The search can case sensitive or case insensitive</li>
+            <li>Use function overloading</li>
+        </ul>
+    
+    Enter the word to search for: <input type="text" id="taskThreeWordTB"><br />
+    Enter the text to be searched: <input type="text" id="taskThreeTextTB"><br />
+    <input type="checkbox" id="isCaseSensitiveCB" /> Case-sensitive search<br />
+    <input type="button" 
+           onclick="findWord(
+            document.getElementById('taskThreeWordTB').value,
+            document.getElementById('taskThreeTextTB').value,
+            document.getElementById('isCaseSensitiveCB').checked)" 
+           value="Find">
+
+    <h2>
+        4. Write a function to count the number of divs on the web page
+    </h2>
+    <div style="background-color: yellow;">And this is the only div!</div>
+    <input type="button" onclick="divsCount()" value="Calculate">
+
+    <h2>
+        5. Write a function that counts how many times given number appears in given array. Write a test function to check if the function is working correctly.
+    </h2>
+    Enter array length: <input type="text" id="task5ArraySizeTB"><br />
+    Enter element to look for: <input type="text" id="task5ElementTB"><br />
+    <input type="button" onclick="alert('Found ' + elementInArrayCount(document.getElementById('task5ElementTB').value, enterArray(document.getElementById('task5ArraySizeTB').value)) + ' elements!')" value="Count">
+    <input type="button" onclick="task5TestFunction()" value="Test Function">
+
+    <h2>
+        6. Write a function that checks if the element at given position in given array of integers is bigger than its two neighbors (when such exist).
+    </h2>
+    Enter array length: <input type="text" id="task6ArraySizeTB"><br />
+    Enter position in the array: <input type="text" id="task6PositionTB"><br />
+    <input type="button" 
+           onclick="task6(document.getElementById('task6ArraySizeTB').value, document.getElementById('task6PositionTB').value, 'task6Out')" value="Calculate">
+    <span id="task6Out"></span>
+
+    <h2>
+        7. Write a function that returns the index of the first element in array that is bigger than its neighbors, or -1, if there’s no such element.
+    </h2>
+        <ul>
+            <li>Use the function from the previous exercise.</li>
+        </ul>
+    
+    Enter array length: <input type="text" id="task7ArraySizeTB"><br />
+    <input type="button"
+           onclick="task7(document.getElementById('task7ArraySizeTB').value, 'task7Out')" value="Calculate">
+    <span id="task7Out"></span>
+</body>
+</html>
