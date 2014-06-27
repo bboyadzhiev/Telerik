@@ -1,0 +1,12 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".html" #>
+<# 
+	var myRepository = "https://github.com/bboyadzhiev/Telerik";
+#>
+<html>
+<body>
+<p>
+Visit my GitHub repository: <#=myRepository#>
+</p>
+</body>
+</html>
