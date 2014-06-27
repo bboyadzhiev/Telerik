@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        function Student(name, grade) {
+
+            if (!(this instanceof arguments.callee)) {
+                return new Student(name, grade);
+            }
+
+            this.name = name;
+            this.grade = grade;
+        }
+
+        Student.prototype.getInfo = function () {
+            return this.name + ' ' + this.grade;
+        }
+
+        var pesho = new Student("Pesho", 6);
+        var gosho = Student("Gosho", 5);
+        console.log(pesho.getInfo());
+        console.log(gosho.getInfo());
+    </script>
+</body>
+</html>

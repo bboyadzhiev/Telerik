@@ -2,10 +2,12 @@
 <#@ output extension=".html" #>
 <# 
 	var myRepository = "https://github.com/bboyadzhiev/Telerik";
+	var task1HelpFile = "https://github.com/bboyadzhiev/Telerik/06.HQCC/15.Development_Tools_HW/01.Tools/Help/Working/Output/HtmlHelp1/Documentation.chm";
 #>
 <html>
 <body>
 <p>
+The generated help file for the first task: <#=task1HelpFile#>
 Visit my GitHub repository: <#=myRepository#>
 </p>
 </body>
