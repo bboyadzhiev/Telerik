@@ -4,6 +4,80 @@
         <name>01.Tools</name>
     </assembly>
     <members>
+        <member name="T:Tools.Line">
+            <summary>
+            Defines a 2D-line
+            </summary>
+        </member>
+        <member name="M:Tools.Line.#ctor(Tools.Point,Tools.Point)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tools.Line"/> class
+            Uses two points
+            </summary>
+            <param name="firstPoint">The first point</param>
+            <param name="secondPoint">The second point</param>
+        </member>
+        <member name="M:Tools.Line.GetLength">
+            <summary>
+            Calculates the length of the line
+            </summary>
+            <returns>The length of the line</returns>
+        </member>
+        <member name="P:Tools.Line.FirstPoint">
+            <summary>
+            Gets or sets first point of the line
+            </summary>
+        </member>
+        <member name="P:Tools.Line.SecondPoint">
+            <summary>
+            Gets or sets the second point of the line
+            </summary>
+        </member>
+        <member name="P:Tools.Line.Length">
+            <summary>
+            Gets the length of the line
+            </summary>
+        </member>
+        <member name="P:Tools.Line.IsHorizontal">
+            <summary>
+            Gets a value indicating whether line is horizontal
+            </summary>
+        </member>
+        <member name="P:Tools.Line.IsVertical">
+            <summary>
+            Gets a value indicating whether line is vertical
+            </summary>
+        </member>
+        <member name="T:Tools.Point">
+            <summary>
+            Defines a 2D-point
+            </summary>
+        </member>
+        <member name="M:Tools.Point.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tools.Point"/> class
+            Defines a 2D-point by given coordinates
+            </summary>
+            <param name="x">The X-coordinate</param>
+            <param name="y">The Y-coordinate</param>
+        </member>
+        <member name="M:Tools.Point.Equals(Tools.Point)">
+            <summary>
+            Checks two points for equality by comparing their coordinates
+            </summary>
+            <param name="otherPoint">The other point to compare by</param>
+            <returns>True if points coordinates are the same</returns>
+        </member>
+        <member name="P:Tools.Point.X">
+            <summary>
+            Gets or sets the X coordinate of the point
+            </summary>
+        </member>
+        <member name="P:Tools.Point.Y">
+            <summary>
+            Gets or sets Y coordinate of the point
+            </summary>
+        </member>
         <member name="T:Tools.Program">
             <summary>
             Main program
@@ -31,7 +105,65 @@
             Represents a Triangle
             </summary>
         </member>
-        <member name="M:Tools.Triangle.GetSurface(System.Double,System.Double)">
+        <member name="M:Tools.Triangle.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tools.Triangle"/> class
+            Creates a triangle by three given sizes with first side lying on the abscissa
+            Second and third sides are lying above the abscissa
+            </summary>
+            <param name="a">The first size, defining a side, lying on the abscissa (0, a)</param>
+            <param name="b">The second size</param>
+            <param name="c">The third size</param>
+        </member>
+        <member name="M:Tools.Triangle.#ctor(Tools.Line,Tools.Line,Tools.Line)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tools.Triangle"/> class
+            Creates a triangle by three given lines
+            </summary>
+            <param name="firstLine">The first line</param>
+            <param name="secondLine">The second line</param>
+            <param name="thirdLine">The third line</param>
+        </member>
+        <member name="M:Tools.Triangle.CanFormTriangle(System.Double,System.Double,System.Double)">
+            <summary>
+            Checks if three lines can form a triangle
+            </summary>
+            <param name="a">The first line</param>
+            <param name="b">The second line</param>
+            <param name="c">The third line</param>
+        </member>
+        <member name="M:Tools.Triangle.GetTriangleArea">
+            <summary>
+            Calculates the triangle area
+            </summary>
+            <returns>The area of the triangle</returns>
+        </member>
+        <member name="P:Tools.Triangle.FirstSide">
+            <summary>
+            Gets or sets the first side of the triangle
+            </summary>
+        </member>
+        <member name="P:Tools.Triangle.SecondSide">
+            <summary>
+            Gets or sets  the second line of the triangle
+            </summary>
+        </member>
+        <member name="P:Tools.Triangle.ThirdSide">
+            <summary>
+            Gets or sets the third line of the triangle
+            </summary>
+        </member>
+        <member name="P:Tools.Triangle.Area">
+            <summary>
+            Gets the triangle area
+            </summary>
+        </member>
+        <member name="T:Tools.TriangleExtensions">
+            <summary>
+            Extends the triangle class functionality
+            </summary>
+        </member>
+        <member name="M:Tools.TriangleExtensions.GetSurface(System.Double,System.Double)">
             <summary>
             Calculates the surface of a triangle, based on 
             side and the altitude to it
@@ -40,7 +172,7 @@
             <param name="altitude">The length of the altitude</param>
             <returns>The area of the triangle</returns>
         </member>
-        <member name="M:Tools.Triangle.GetSurface(System.Double,System.Double,System.Double)">
+        <member name="M:Tools.TriangleExtensions.GetSurface(System.Double,System.Double,System.Double)">
             <summary>
             Calculates the surface of a triangle, based on
             the lengths of its sides. Uses Heron's formula
@@ -50,7 +182,7 @@
             <param name="sideC">The length of the third side</param>
             <returns>The surface of the triangle</returns>
         </member>
-        <member name="M:Tools.Triangle.GetSurface(System.Double,System.Double,System.Single)">
+        <member name="M:Tools.TriangleExtensions.GetSurface(System.Double,System.Double,System.Single)">
             <summary>
             Calculates the surface of a triangle, based on
             the lengths of two of its sides and the angle between them

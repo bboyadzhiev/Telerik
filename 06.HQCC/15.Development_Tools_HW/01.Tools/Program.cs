@@ -1,4 +1,7 @@
-﻿namespace Tools
+﻿// <copyright file="Program.cs" company="bboyadzhiev">
+//  Copyright bboyadzhiev
+// </copyright>
+namespace Tools
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +19,7 @@
         /// </summary>
         public static void PrintMenu()
         {
-            Console.WriteLine("Calculate area using: ");
+            Console.WriteLine("Calculate truangle area using: ");
             Console.WriteLine("1. The length of a side and an altitude to it");
             Console.WriteLine("2. The length of the three sides");
             Console.WriteLine("3. The length of two of the sides and the angle between them");
@@ -42,7 +45,7 @@
                     double.TryParse(Console.ReadLine(), out paramA);
                     Console.Write("Altitude: ");
                     double.TryParse(Console.ReadLine(), out paramB);
-                    return Triangle.GetSurface(paramA, paramB);
+                    return TriangleExtensions.GetSurface(paramA, paramB);
                 case 2: Console.WriteLine("- Ener the length of the three sides");
                     Console.Write("First side: ");
                     double.TryParse(Console.ReadLine(), out paramA);
@@ -50,7 +53,9 @@
                     double.TryParse(Console.ReadLine(), out paramB);
                     Console.Write("Third side: ");
                     double.TryParse(Console.ReadLine(), out paramC);
-                    return Triangle.GetSurface(paramA, paramB, paramC);
+                    Triangle t = new Triangle(paramA, paramB, paramC);
+                    Console.WriteLine(t.Area);
+                    return t.Area;
                 case 3: Console.WriteLine("- Enter two sides and the angle between them");
                     Console.Write("First side: ");
                     double.TryParse(Console.ReadLine(), out paramA);
@@ -59,7 +64,7 @@
                     Console.Write("Angle: ");
                     float.TryParse(Console.ReadLine(), out angle);
                     angle = (float)(Math.PI * angle / 180.0);
-                    return Triangle.GetSurface(paramA, paramB, angle);
+                    return TriangleExtensions.GetSurface(paramA, paramB, angle);
                 default:
                     return 0;
             }
@@ -72,6 +77,8 @@
         {
             Console.WriteLine("!!! This old homework has been obfuscated using Eazfuscator !!!");
             Console.WriteLine("!!! Try to decompile the 'Release' version of the program   !!!");
+            Console.WriteLine("!!! Sandcastle has been used to provide documentation       !!!");
+            Console.WriteLine("!!! StyleCop Has been used !!!");
             Console.WriteLine();
             Console.WriteLine("--- Calculates a triangle's area by given parameters ---");
             PrintMenu();

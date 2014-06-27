@@ -1,10 +1,10 @@
-﻿namespace Tools
+﻿// <copyright file="Triangle.cs" company="bboyadzhiev">
+//  Copyright bboyadzhiev
+// </copyright>
+
+namespace Tools
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Represents a Triangle
@@ -12,42 +12,107 @@
     public class Triangle
     {
         /// <summary>
-        /// Calculates the surface of a triangle, based on 
-        /// side and the altitude to it
+        /// Initializes a new instance of the <see cref="Triangle"/> class
+        /// Creates a triangle by three given sizes with first side lying on the abscissa
+        /// Second and third sides are lying above the abscissa
         /// </summary>
-        /// <param name="side">The length of the side</param>
-        /// <param name="altitude">The length of the altitude</param>
+        /// <param name="a">The first size, defining a side, lying on the abscissa (0, a)</param>
+        /// <param name="b">The second size</param>
+        /// <param name="c">The third size</param>
+        public Triangle(double a, double b, double c)
+        {
+            CanFormTriangle(a, b, c);
+
+            double deltaX;
+            deltaX = ((a * a) + (b * b) - (c * c)) / (2 * a);
+
+            // Vertice C, dimension x
+            double cx = a - deltaX;
+
+            // Vertice C, dimension y
+            double cy;
+            cy = Math.Sqrt((b * b) - ((((a * a) + (b * b) - (c * c)) / (2 * a)) * (((a * a) + (b * b) - (c * c)) / (2 * a))));
+
+            Point verticeA = new Point(0, 0);
+            Point verticeB = new Point(a, 0);
+            Point verticeC = new Point(cx, cy);
+
+            this.FirstSide = new Line(verticeA, verticeB);
+            this.SecondSide = new Line(verticeB, verticeC);
+            this.ThirdSide = new Line(verticeA, verticeC);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Triangle"/> class
+        /// Creates a triangle by three given lines
+        /// </summary>
+        /// <param name="firstLine">The first line</param>
+        /// <param name="secondLine">The second line</param>
+        /// <param name="thirdLine">The third line</param>
+        public Triangle(Line firstLine, Line secondLine, Line thirdLine)
+        {
+            CanFormTriangle(firstLine.Length, secondLine.Length, thirdLine.Length);
+
+            this.FirstSide = firstLine;
+            this.SecondSide = secondLine;
+            this.ThirdSide = thirdLine;
+        }
+
+        /// <summary>
+        /// Gets or sets the first side of the triangle
+        /// </summary>
+        public Line FirstSide { get; set; }
+
+        /// <summary>
+        /// Gets or sets  the second line of the triangle
+        /// </summary>
+        public Line SecondSide { get; set; }
+
+        /// <summary>
+        /// Gets or sets the third line of the triangle
+        /// </summary>
+        public Line ThirdSide { get; set; }
+
+        /// <summary>
+        /// Gets the triangle area
+        /// </summary>
+        public double Area
+        {
+            get { return this.GetTriangleArea(); }
+        }
+
+        /// <summary>
+        /// Checks if three lines can form a triangle
+        /// </summary>
+        /// <param name="a">The first line</param>
+        /// <param name="b">The second line</param>
+        /// <param name="c">The third line</param>
+        public static void CanFormTriangle(double a, double b, double c)
+        {
+            if (a <= 0 || b <= 0 || c <= 0)
+            {
+                throw new ArgumentOutOfRangeException("The size of all the sides should be greater than zero!");
+            }
+
+            if ((a + b <= c) || (a + c <= b) || (b + c <= a))
+            {
+                throw new ArgumentOutOfRangeException("Sizes cannot form a triangle!");
+            }
+        }
+
+        /// <summary>
+        /// Calculates the triangle area
+        /// </summary>
         /// <returns>The area of the triangle</returns>
-        public static double GetSurface(double side, double altitude)
+        private double GetTriangleArea()
         {
-            return 0.5 * side * altitude;
-        }
+            double sideA = this.FirstSide.Length;
+            double sideB = this.SecondSide.Length;
+            double sideC = this.ThirdSide.Length;
 
-        /// <summary>
-        /// Calculates the surface of a triangle, based on
-        /// the lengths of its sides. Uses Heron's formula
-        /// </summary>
-        /// <param name="sideA">The length of the first side</param>
-        /// <param name="sideB">The length of the second side</param>
-        /// <param name="sideC">The length of the third side</param>
-        /// <returns>The surface of the triangle</returns>
-        public static double GetSurface(double sideA, double sideB, double sideC)
-        {
-            double p = (sideA + sideB + sideC) / 2;
-            return Math.Sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
-        }
-
-        /// <summary>
-        /// Calculates the surface of a triangle, based on
-        /// the lengths of two of its sides and the angle between them
-        /// </summary>
-        /// <param name="sideA">The length of the first side</param>
-        /// <param name="sideB">The length of the second side</param>
-        /// <param name="angle">The value of the angle between them</param>
-        /// <returns>The surface of the triangle</returns>
-        public static double GetSurface(double sideA, double sideB, float angle)
-        {
-            return (double)(0.5 * sideA * sideB * Math.Sin(angle));
+            double semiperimeter = (sideA + sideB + sideC) / 2;
+            double triangleArea = Math.Sqrt(semiperimeter * (semiperimeter - sideA) * (semiperimeter - sideB) * (semiperimeter - sideC));
+            return triangleArea;
         }
     }
 }
