@@ -2,13 +2,15 @@
 <#@ output extension=".html" #>
 <# 
 	var myRepository = "https://github.com/bboyadzhiev/Telerik";
-	var task1HelpFile = "https://github.com/bboyadzhiev/Telerik/06.HQCC/15.Development_Tools_HW/01.Tools/Documentation.chm";
+	var task1HelpFile = "https://github.com/bboyadzhiev/Telerik/blob/master/06.HQCC/15.Development_Tools_HW/01.Tools/Documentation.chm";
 #>
 <html>
 <body>
 <p>
-The generated help file for the first task: <#=task1HelpFile#>
-Visit my GitHub repository: <#=myRepository#>
+<a href="<#=task1HelpFile#>">The generated help file for the first task</a>
+</p>
+<p>
+<a href="<#=myRepository#>">Visit my GitHub repository</a
 </p>
 </body>
 </html>
