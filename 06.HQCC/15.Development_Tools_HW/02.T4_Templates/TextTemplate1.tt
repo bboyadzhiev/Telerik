@@ -2,7 +2,7 @@
 <#@ output extension=".html" #>
 <# 
 	var myRepository = "https://github.com/bboyadzhiev/Telerik";
-	var task1HelpFile = "https://github.com/bboyadzhiev/Telerik/06.HQCC/15.Development_Tools_HW/01.Tools/Help/Working/Output/HtmlHelp1/Documentation.chm";
+	var task1HelpFile = "https://github.com/bboyadzhiev/Telerik/06.HQCC/15.Development_Tools_HW/01.Tools/Documentation.chm";
 #>
 <html>
 <body>

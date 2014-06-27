@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>01.Tools</name>
+    </assembly>
+    <members>
+        <member name="T:Tools.Program">
+            <summary>
+            Main program
+            </summary>
+        </member>
+        <member name="M:Tools.Program.PrintMenu">
+            <summary>
+            Prints a menu to the Console
+            </summary>
+        </member>
+        <member name="M:Tools.Program.CalculateArea(System.Byte)">
+            <summary>
+            Calculates the area of a triangle, using the method, specified by 'choice'
+            </summary>
+            <param name="choice">Specifies the method to be used to calculate the area</param>
+            <returns>The calculate area</returns>
+        </member>
+        <member name="M:Tools.Program.Main">
+            <summary>
+            Main entry point
+            </summary>
+        </member>
+        <member name="T:Tools.Triangle">
+            <summary>
+            Represents a Triangle
+            </summary>
+        </member>
+        <member name="M:Tools.Triangle.GetSurface(System.Double,System.Double)">
+            <summary>
+            Calculates the surface of a triangle, based on 
+            side and the altitude to it
+            </summary>
+            <param name="side">The length of the side</param>
+            <param name="altitude">The length of the altitude</param>
+            <returns>The area of the triangle</returns>
+        </member>
+        <member name="M:Tools.Triangle.GetSurface(System.Double,System.Double,System.Double)">
+            <summary>
+            Calculates the surface of a triangle, based on
+            the lengths of its sides. Uses Heron's formula
+            </summary>
+            <param name="sideA">The length of the first side</param>
+            <param name="sideB">The length of the second side</param>
+            <param name="sideC">The length of the third side</param>
+            <returns>The surface of the triangle</returns>
+        </member>
+        <member name="M:Tools.Triangle.GetSurface(System.Double,System.Double,System.Single)">
+            <summary>
+            Calculates the surface of a triangle, based on
+            the lengths of two of its sides and the angle between them
+            </summary>
+            <param name="sideA">The length of the first side</param>
+            <param name="sideB">The length of the second side</param>
+            <param name="angle">The value of the angle between them</param>
+            <returns>The surface of the triangle</returns>
+        </member>
+    </members>
+</doc>
