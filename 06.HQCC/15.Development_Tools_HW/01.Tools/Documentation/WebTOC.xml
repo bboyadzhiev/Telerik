@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="5ae912a2-e698-4ff9-9f49-4e31e80c9c25" Title="Tools" Url="html/daf41a2d-7571-08f1-f886-b0961c253e4d.htm">
+    <HelpTOCNode Id="9ecdf887-5b9b-45db-9b3c-787cb282b1de" Title="Line Class" Url="html/80f7390e-f2e1-1d5f-24a2-52e7b195911d.htm">
+      <HelpTOCNode Title="Line Constructor " Url="html/43625349-cc9e-dea2-bb00-eb689d4f018d.htm" />
+      <HelpTOCNode Id="7a582c99-d4d1-4d6d-bd34-a41af4909d0c" Title="Line Properties" Url="html/82d726a4-31e7-dffe-e4db-78f382d843c9.htm">
+        <HelpTOCNode Title="FirstPoint Property " Url="html/e2203dda-9f64-630a-f193-d2dd73d01550.htm" />
+        <HelpTOCNode Title="IsHorizontal Property " Url="html/74c35dd3-505f-7dc1-f117-65a0a4164315.htm" />
+        <HelpTOCNode Title="IsVertical Property " Url="html/cb3a1506-adce-f8f9-12ae-c7e3c82076da.htm" />
+        <HelpTOCNode Title="Length Property " Url="html/7f97c054-7016-85ec-89a9-f797dce80014.htm" />
+        <HelpTOCNode Title="SecondPoint Property " Url="html/3b020486-c8f7-df4d-dadd-2daac5d1b3f9.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="0b71d6fa-0c3f-4a47-b015-c333449e865a" Title="Point Class" Url="html/0a1a4db5-9db7-ab5a-a514-573c6d9e105c.htm">
+      <HelpTOCNode Title="Point Constructor " Url="html/66afeb3f-6b69-faff-b1df-00fc1512a359.htm" />
+      <HelpTOCNode Id="153aa0b2-2aae-44ef-9541-9d8a03dd7ea9" Title="Point Methods" Url="html/6e2319e4-08fd-9d72-6c83-4330d48d1cb9.htm">
+        <HelpTOCNode Title="Equals Method " Url="html/ef001420-eb4e-4569-fe55-2ccfe93b46bd.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="cfa9b5d6-5fca-45b3-b4ee-a2531a9ead52" Title="Point Properties" Url="html/0caab85b-5a30-4452-e725-cd55c0be08ba.htm">
+        <HelpTOCNode Title="X Property " Url="html/18468411-9e06-c76e-2523-5c83fbea8a2b.htm" />
+        <HelpTOCNode Title="Y Property " Url="html/8b400045-3f08-8389-9cbe-6f6c2cd33874.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="a2b32e5c-7f9e-43b8-b2b5-bd3a0d19f409" Title="Program Class" Url="html/4f53d47e-f79e-5a4c-7604-d68ecf4c4ec4.htm">
+      <HelpTOCNode Title="Program Constructor " Url="html/d3f562ba-8a12-7c21-da2e-6a9164459d71.htm" />
+      <HelpTOCNode Id="96aa6602-6088-46ab-8d94-750280c80c68" Title="Program Methods" Url="html/232bba75-339c-3e7e-bbab-df06ec35ad35.htm">
+        <HelpTOCNode Title="CalculateArea Method " Url="html/6c11cccf-4ded-64a2-b0d2-c7765e392068.htm" />
+        <HelpTOCNode Title="Main Method " Url="html/30b5db53-a17f-ce25-4f64-e7c2c28117d0.htm" />
+        <HelpTOCNode Title="PrintMenu Method " Url="html/03a58d42-a1cf-8326-2400-c9ce2463aaef.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="4c79e067-08f8-4996-9bb7-bf384ef065a4" Title="Triangle Class" Url="html/ed21cd77-6da6-fabf-33c7-43a57e30082d.htm">
+      <HelpTOCNode Id="d406e056-65bc-443d-a719-a6cb5590c0c7" Title="Triangle Constructor " Url="html/0f4ff88d-dc70-8acb-5f7f-f9326a816cc9.htm">
+        <HelpTOCNode Title="Triangle Constructor (Double, Double, Double)" Url="html/1362d7ca-f4f4-48ea-f197-57410c95d6c2.htm" />
+        <HelpTOCNode Title="Triangle Constructor (Line, Line, Line)" Url="html/9a915f58-3440-1dbf-425e-c33eaf905bb3.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="a0109752-5e76-4e3d-bae0-83872969b520" Title="Triangle Methods" Url="html/52d4bddb-2302-670a-f1d6-c57232a022b7.htm">
+        <HelpTOCNode Title="CanFormTriangle Method " Url="html/e3b8e036-e6e5-c4c0-8724-cd0d6347eb14.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="654e83c8-8d63-4afa-af11-3ee98cf5ecf1" Title="Triangle Properties" Url="html/954b8ee7-e195-ab9f-0a23-ecebc0b1f122.htm">
+        <HelpTOCNode Title="Area Property " Url="html/cd815158-7052-d34f-824f-dccb910282a1.htm" />
+        <HelpTOCNode Title="FirstSide Property " Url="html/bf1b5eca-6e61-3a6f-86c6-640a4be1c064.htm" />
+        <HelpTOCNode Title="SecondSide Property " Url="html/ccf70850-c2db-830d-0725-2711b8889cf0.htm" />
+        <HelpTOCNode Title="ThirdSide Property " Url="html/a2813de6-39d7-d6a8-0e33-4edb55352449.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2d4fd9cd-9e65-4bd0-b886-9a2e972590e9" Title="TriangleExtensions Class" Url="html/a9ee4ee1-4714-f33d-845d-a489e7213bba.htm">
+      <HelpTOCNode Id="4557554e-1774-45ca-8a7e-79c030090180" Title="TriangleExtensions Methods" Url="html/7fd24f25-d272-48d9-462a-6cf005d892b6.htm">
+        <HelpTOCNode Id="6dcebbd7-d86a-4f62-a95d-f1e1f21f1993" Title="GetSurface Method " Url="html/96663413-3d82-7751-89d8-baa8712aba4d.htm">
+          <HelpTOCNode Title="GetSurface Method (Double, Double)" Url="html/17016738-d1f3-1a2b-6064-8b316cd47a08.htm" />
+          <HelpTOCNode Title="GetSurface Method (Double, Double, Double)" Url="html/a22805d7-bd96-3c01-3f10-f64a88f62bba.htm" />
+          <HelpTOCNode Title="GetSurface Method (Double, Double, Single)" Url="html/446d2a97-33fb-6bd2-f771-13e6d84c9ec6.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>
