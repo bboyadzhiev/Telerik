@@ -2,8 +2,8 @@
 <#@ output extension=".html" #>
 <# 
 	var myRepository = "https://github.com/bboyadzhiev/Telerik";
-	var task1WebHelpFiles = "../01.Tools/Help/index.html";
-	var task1HelpFile = "../01.Tools/Help/Documentation.chm";
+	var task1WebHelpFiles = "../01.Tools/Documentation/index.html";
+	var task1HelpFile = "../01.Tools/Documentation/Documentation.chm";
 #>
 <html>
 <body>
