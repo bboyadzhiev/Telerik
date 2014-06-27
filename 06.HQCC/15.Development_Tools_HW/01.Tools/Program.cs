@@ -70,6 +70,9 @@
         /// </summary>
         public static void Main()
         {
+            Console.WriteLine("!!! This old homework has been obfuscated using Eazfuscator !!!");
+            Console.WriteLine("!!! Try to decompile the 'Release' version of the program   !!!");
+            Console.WriteLine();
             Console.WriteLine("--- Calculates a triangle's area by given parameters ---");
             PrintMenu();
             double area = 0;
