@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="scripts/domModule.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="buttons">
+            <input type="button" id="appendDivButton" name="name" value="append div to #wrapper" />
+            <input type="button" id="append100MenusButton" name="name" value="append 100 menu items" />
+            <input type="button" id="removeButton" name="name" value="remove top menu item" />
+            <script>
+                var navItem = document.createElement('li');
+                var div = document.createElement('div');
+                div.textContent = 'new Div';
+
+                domModule.addHandler('#removeButton', 'click', function () {
+                    //removes li:first-child from #main-nav ul
+                    domModule.removeChild("#main-nav ul", "li:first-child");
+                });
+
+                domModule.addHandler('#append100MenusButton', 'click', function () {
+                    for (var i = 1; i <= 100; i++) {
+                        navItem.textContent = "Item Number " + i + ", by domModule";
+                        domModule.appendToBuffer("#main-nav ul", navItem.cloneNode(true));
+                    }
+                });
+
+                domModule.addHandler('#appendDivButton', 'click', function () {
+                    //appends div to #wrapper
+                    domModule.appendChild(div, "#wrapper");
+                });
+
+            </script>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Canvas drawing module</title>
+    <script src="scripts/canvasDraw.js"></script>
+</head>
+<body>
+    <div id="container">
+        <canvas id="theCanvas" width="640" height="480"></canvas>
+    </div>
+    <script type="text/javascript">
+        var canvasId = 'theCanvas';
+        var canvas = new Canvas(canvasId);
+        
+        canvas.Line(100, 100, 250, 200);
+        canvas.Circle(400, 200, 100);
+        canvas.Rect(100, 200, 150, 100);
+    </script>
+</body>
+</html>
