@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("_01.DOM_module")]
+[assembly: AssemblyTitle("_01.Function_Expressions_HW")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("_01.DOM_module")]
+[assembly: AssemblyProduct("_01.Function_Expressions_HW")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2eca1929-2316-4108-b63d-01cde13463b6")]
+[assembly: Guid("bc7dd054-66e1-4f6f-90e8-d0132ea36408")]
 
 // Version information for an assembly consists of the following four values:
 //
