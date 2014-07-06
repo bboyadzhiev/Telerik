@@ -1,4 +1,5 @@
 ﻿/// <reference path="snakeCanvas.js" />
+/// <reference path="scores.js" />
 var directions = {
     up: 1,
     down: 2,
@@ -10,7 +11,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var snakeEngine = (function () {
+var snakeEngine = function () {
     var
         kbdCodes1 = {
             up: 87,
@@ -32,24 +33,34 @@ var snakeEngine = (function () {
         };
     var mainLoop,
         SPEED = 250;//ms
-    
+    var description = document.getElementById('Snake');
+    description.style.display = "inline-block";
+    var started = false;
 
     var startGame = function (itemsCount, boardWidth, boardHeight) {
+        if (started) { alert('Game alredy started!'); return; };
+        started = true;
         var boardWidth = boardWidth || 40;
         var boardHeight = boardHeight || 20;
         var itemsCount = itemsCount || (boardWidth * boardHeight) / 100;
 
         var snakeField = snakeCanvas.getSnakeCanvas(boardWidth, boardHeight);
+        snakeField.drawBoard();
+
+        var snakesScoreBoard = scoresModule.getScoresBoard(200, 300);
+        description.style.width = 200 + 'px';
+
         var snake1 = new Snake(5, 5, 1, directions.right, 1);
         var snake2 = new Snake(5, boardWidth - 6, boardHeight - 2, directions.left, 2);
+
+        snakesScoreBoard.addPlayer(snake1.getPlayerInfo());
+        snakesScoreBoard.addPlayer(snake2.getPlayerInfo());
+        snakesScoreBoard.draw();
 
         var guilty = 0;
         var wBorder = boardWidth - 1,
             hBorder = boardHeight - 1;
         var items = randomItems(itemsCount, wBorder, hBorder);
-
-        snakeField.drawBoard();
-
 
         snakeControls(snake1, snake2);
         clearInterval(mainLoop);
@@ -57,38 +68,39 @@ var snakeEngine = (function () {
             // check for items
             snake1.eatItems(items);
             snake2.eatItems(items);
-            
-           // snake1.finishRedirection();
-           // snake2.finishRedirection();
+
+            if (snake1.hasEated || snake2.hasEated) {
+                updateScores();
+            }
+
+            if (items.length == 0) {
+                items = randomItems(itemsCount, wBorder, hBorder);
+            }
+            // snake1.finishRedirection();
+            // snake2.finishRedirection();
 
             //Check for collisions
-            if (snake1.inSnakeCollision(snake2) || snake1.inSelfCollision() || snake1.inBorderCollision(wBorder, hBorder)) {
-                guilty += 1;
-            }
-
-            if (snake2.inSnakeCollision(snake1) || snake2.inSelfCollision() || snake2.inBorderCollision(wBorder, hBorder)) {
-                guilty += 2;
-            }
-
+            guilty = checkCollisions(snake1, snake2);
             if (guilty != 0) {
-                if (guilty == 1) {
-                    confirm('Player 1 has collided ' + snake1.getCollision());
-                } else if (guilty == 2) {
-                    confirm('Player 2 has collided ' + snake2.getCollision());
-                } else {
-                    confirm('Both players have collided ' + snake1.getCollision() + '!');
+                switch (guilty) {
+                    case 1: alert('Player 1 has collided ' + snake1.getCollision()); break;
+                    case 2: alert('Player 2 has collided ' + snake2.getCollision()); break;
+                    case 3: alert('Both players have collided ' + snake1.getCollision() + '!'); break;
                 }
-                //clean corpse (snake1); not needed but available anyway
-                snakeField.clearSnake(snake2.getBody());
-                snake1.reset();
-                //clean corpse (snake2); not needed but available anyway
-                snakeField.clearSnake(snake2.getBody());
-                snake2.reset();
 
+                updateScores();
+                snake1.reset();
+                snake2.reset();
+                if (gameOverCheck()) {
+                    clearInterval(mainLoop);
+                    return;
+                }
+                
                 //redraw board
                 snakeField.drawBoard(boardWidth, boardHeight);
                 guilty = 0;
                 items = randomItems(itemsCount, wBorder, hBorder);
+                
             }
 
             //Items
@@ -103,6 +115,45 @@ var snakeEngine = (function () {
             snakeField.reDrawSnake(snake2.getBody(), snake2.direction);
 
         }, SPEED);
+
+        var updateScores = function () {
+            snakesScoreBoard.updatePlayer(snake1.getPlayerInfo());
+            snakesScoreBoard.updatePlayer(snake2.getPlayerInfo());
+            snakesScoreBoard.updatePlayersBoards();
+        };
+
+        var gameOverCheck = function () {
+            if (snake1.lives == 0 || snake2.lives == 0) {
+                if (snake1.points > snake2.points) {
+                    alert("GAME OVER \n" + snake1.title + " is the winner with " + snake1.points + " points");
+                } else if (snake2.points > snake1.points) {
+                    alert("GAME OVER \n" + snake2.title + " is the winner with " + snake2.points + " points");
+                } else {
+                    alert("GAME OVER \nGame is DRAW!");
+                }
+                return true;
+            }
+            return false;
+        }
+
+        var checkCollisions = function (snake1, snake2) {
+            var guilty = 0;
+            if (snake1.inSnakeCollision(snake2)
+                || snake1.inSelfCollision()
+                || snake1.inBorderCollision(wBorder, hBorder)) {
+                guilty = 1;
+                snake1.reduceLives();
+                snake1.reducePionts();
+            }
+            if (snake2.inSnakeCollision(snake1)
+                || snake2.inSelfCollision()
+                || snake2.inBorderCollision(wBorder, hBorder)) {
+                guilty += 2;
+                snake2.reduceLives();
+                snake2.reducePionts();
+            }
+            return guilty;
+        }
     };
 
     var randomItems = function (itemsCount, wBorder, hBorder) {
@@ -130,8 +181,8 @@ var snakeEngine = (function () {
     };
 
     var Item = function (wBorder, hBorder) {
-        this.x = getRandomInt(1, wBorder-1);
-        this.y = getRandomInt(1, hBorder-1);
+        this.x = getRandomInt(1, wBorder - 1);
+        this.y = getRandomInt(1, hBorder - 1);
 
         return { x: this.x, y: this.y }
     };
@@ -146,6 +197,8 @@ var snakeEngine = (function () {
         this.hasEated = 0;
         this.id = id;
         this.points = 0;
+        this.lives = 3;
+        this.title = 'Player ' + id;
         this.redirecting = false;
     };
 
@@ -162,14 +215,11 @@ var snakeEngine = (function () {
         };
 
         getBody = function () {
-            var _body = this.body.slice()
-            return _body;
+            return this.body;
         }
 
         getTail = function () {
-            var _tail = this.body[this.body.length - 1]
-            return _tail;
-            // return this.body[this.body.length - 1];
+            return this.body[this.body.length - 1];
         };
 
         grow = function () {
@@ -245,7 +295,7 @@ var snakeEngine = (function () {
 
             if (change) {
                 this.direction = newDirection;
-             //   this.redirecting = true;
+                //   this.redirecting = true;
             }
         };
 
@@ -259,6 +309,7 @@ var snakeEngine = (function () {
                 if (head.x == items[i].x && head.y == items[i].y) {
                     items.splice(i, 1);
                     this.hasEated++;
+                    this.addPoint();
                 }
             }
         };
@@ -266,7 +317,7 @@ var snakeEngine = (function () {
         getCollision = function () {
             var reason;
             switch (this.collision) {
-                case collisionType.himself: reason = 'with himself';  break;
+                case collisionType.himself: reason = 'with itself'; break;
                 case collisionType.otherPlayer: reason = 'with the other player'; break;
                 case collisionType.border: reason = 'with the border'; break;
                 case collisionType.obstacle: reason = 'with an obstacle'; break;
@@ -316,8 +367,23 @@ var snakeEngine = (function () {
             return inCollision;
         };
 
+        getPlayerInfo = function () {
+            return { id: this.id, title: this.title, score: this.points, lives: this.lives };
+        };
+
+        reduceLives = function () {
+            this.lives = this.lives - 1;
+        }
+
+        reducePionts = function () {
+            this.points = this.points - 5;
+        }
+
+        addPoint = function () {
+            this.points = this.points + 1;
+        }
+
         return {
-            
             changeDirection: changeDirection,
             finishRedirection: finishRedirection,
             getHead: getHead,
@@ -330,7 +396,11 @@ var snakeEngine = (function () {
             inSelfCollision: inSelfCollision,
             inBorderCollision: inBorderCollision,
             inSnakeCollision: inSnakeCollision,
-            reset: reset
+            reset: reset,
+            getPlayerInfo: getPlayerInfo,
+            reduceLives: reduceLives,
+            reducePionts: reducePionts,
+            addPoint: addPoint
         }
 
     }());
@@ -338,5 +408,5 @@ var snakeEngine = (function () {
     return {
         startGame: startGame
     }
-}());
+}();
 

@@ -16,6 +16,10 @@ var snakeCanvas = function () {
     };
     
     var canvas = document.getElementById('snakeCanvas');
+    canvas.style.display = "inline-block";
+    canvas.style.textAlign = 'center';
+    canvas.style.verticalAlign = 'top';
+
     var ctx = canvas.getContext('2d'),
 
     SnakeCanvas = (function (boardWidth, boardHeight) {
@@ -36,7 +40,6 @@ var snakeCanvas = function () {
             tile.onload = function () {
                 ctx.drawImage(tile, x, y, sizeX, sizeY);
             }
-
         }
 
         SnakeCanvas.prototype.drawItems = function (items) {
@@ -86,12 +89,11 @@ var snakeCanvas = function () {
                 }
             }
             console.log("tiles=" + this.tiles);
+            this.tiles = 0;
         }
 
         return SnakeCanvas;
     }());
-
-
 
     return {
         getSnakeCanvas: function (boardWidth, boardHeight) {

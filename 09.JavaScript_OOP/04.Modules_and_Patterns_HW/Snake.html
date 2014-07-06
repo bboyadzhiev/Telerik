@@ -1,13 +1,18 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-
-    
+    <title>Snakes</title>
 </head>
 <body>
-    <canvas id="snakeCanvas"></canvas>
+    <canvas id="snakeCanvas"></canvas><div id="Snake">
+        <div id="scoresDiv">
+        </div>
+        <p>Player 1 (top-left) controls : A, W, S & D keys</p>
+        <p>Player 2 (bottom-right) controls : Left, Up, Down & Right arrows</p>
+    </div>
+
     <script src="scripts/snakeCanvas.js"></script>
+    <script src="scripts/scores.js"></script>
     <script src="scripts/snakeEngine.js"></script>
     <script type="text/javascript">
         snakeEngine.startGame(null, 60, 48);

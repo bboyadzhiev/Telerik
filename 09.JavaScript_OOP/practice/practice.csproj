@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2F5BB02F-28B2-4DBD-9256-AFEAEFD1EC42}</ProjectGuid>
+    <ProjectGuid>{9F6A00BD-A7CF-4393-8871-BBD41A3F3E30}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_04.Modules_and_Patterns_HW</RootNamespace>
-    <AssemblyName>04.Modules_and_Patterns_HW</AssemblyName>
+    <RootNamespace>practice</RootNamespace>
+    <AssemblyName>practice</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -57,10 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\snakeCanvas.js" />
-    <Content Include="scripts\snakeEngine.js" />
-    <Content Include="scripts\scores.js" />
-    <Content Include="Snake.html" />
+    <Content Include="HtmlPage1.html" />
+    <Content Include="script1.js" />
+    <Content Include="script2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +72,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -90,9 +86,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2584</DevelopmentServerPort>
+          <DevelopmentServerPort>1062</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2584/</IISUrl>
+          <IISUrl>http://localhost:1062/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

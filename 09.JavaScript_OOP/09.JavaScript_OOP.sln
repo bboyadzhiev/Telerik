@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam_Preparation", "Exam_Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam_Preperation_2", "Exam_Preperation_2\Exam_Preperation_2.csproj", "{14FC255E-D3FC-4B0B-A591-3C4E70341034}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "practice", "practice\practice.csproj", "{9F6A00BD-A7CF-4393-8871-BBD41A3F3E30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.AMD_RequireJS_HW", "05.AMD_RequireJS_HW\05.AMD_RequireJS_HW.csproj", "{2CD7310E-8178-4597-951A-5413BE275FDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{14FC255E-D3FC-4B0B-A591-3C4E70341034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14FC255E-D3FC-4B0B-A591-3C4E70341034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14FC255E-D3FC-4B0B-A591-3C4E70341034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6A00BD-A7CF-4393-8871-BBD41A3F3E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6A00BD-A7CF-4393-8871-BBD41A3F3E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6A00BD-A7CF-4393-8871-BBD41A3F3E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6A00BD-A7CF-4393-8871-BBD41A3F3E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD7310E-8178-4597-951A-5413BE275FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD7310E-8178-4597-951A-5413BE275FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD7310E-8178-4597-951A-5413BE275FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD7310E-8178-4597-951A-5413BE275FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

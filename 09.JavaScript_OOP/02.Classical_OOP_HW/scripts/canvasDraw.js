@@ -57,4 +57,3 @@ var Canvas = (function () {
 
     return Canvas;
 }());
-
