@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\app.js" />
+    <Content Include="scripts\index.html" />
     <Content Include="scripts\libs\requirejs\require.js" />
     <Content Include="scripts\structures.js" />
     <Content Include="scripts\todo-list\container.js" />

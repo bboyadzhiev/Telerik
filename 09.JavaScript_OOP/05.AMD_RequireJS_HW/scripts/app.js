@@ -16,10 +16,9 @@ require(["jquery", "controls"], function ($, controls) {
         { id: 3, name: "Ivaylo Kenov", age: 20, avatarUrl: "images/ivo.jpg" },
         { id: 4, name: "Todor Stoyanov", age: 21, avatarUrl: "images/todor.jpg" }
     ];
-
     var comboBox = controls.ComboBox(people);
     var template = $('#person-template').html();
     var comboBoxHtml = comboBox.render(template);
-    
+
     $('#container').html(comboBoxHtml);
 });

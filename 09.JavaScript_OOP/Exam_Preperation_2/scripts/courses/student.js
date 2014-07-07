@@ -1,23 +1,17 @@
+/// <reference path="course.js" />
 define(function () {
     var Student;
-
     Student = (function () {
-        function Student(studentInformation) { //constructor
-            this.name = studentInformation.name;
-            this.exam = studentInformation.exam;
-            this.homework = studentInformation.homework;
-            this.attendance = studentInformation.attendance;
-            this.teamwork = studentInformation.teamwork;
-            this.bonus = studentInformation.bonus;
+        function Student(studentInfo) {
+            this.name = studentInfo.name;
+            this.exam = studentInfo.exam;
+            this.homework = studentInfo.homework;
+            this.attendance = studentInfo.attendance;
+            this.teamwork = studentInfo.teamwork;
+            this.bonus = studentInfo.bonus;
+
         };
 
-        Student.prototype.setTotalResult = function () {
-
-        }
-
-        Student.prototype.getTotalResult = function () {
-            return tjis.totalResult;
-        }
         return Student;
     }());
 

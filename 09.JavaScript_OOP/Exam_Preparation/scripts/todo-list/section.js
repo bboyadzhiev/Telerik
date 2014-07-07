@@ -3,25 +3,29 @@ define(function () {
     var Section;
     Section = (function () {
         function Section(title) {
-            this._items = {};
-            this.title = title;
-        }
-
-        Section.prototype.add = function (item) {
-            this._items.push(item);
+            this._title = title;
+            this._itemsList = [];
         };
-        Section.prototype.getData = function () {
-            var copiedArray = this._items.slice(); // fix
-            return {
-                titie: this.title,
-                //items: this._items // VERY BAD!!!
-                items: copiedArray
+
+        Section.prototype = {
+            add: function (item) {
+                this._itemsList.push(item);
+            },
+            getData: function () {
+                var itemsList = this._itemsList.map(function (item) {
+                    return item.getData();
+                });
+                
+                return {
+                    title: this._title,
+                    items: itemsList
+                };
             }
+             
+
         };
 
         return Section;
-
     }());
-
     return Section;
 });

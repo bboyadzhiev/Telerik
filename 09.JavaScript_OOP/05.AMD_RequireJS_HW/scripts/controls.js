@@ -2,7 +2,6 @@
 /// <reference path="libs/handlebars-v1.3.0.js" />
 /// <reference path="libs/jquery-2.1.1.js" />
 define(["jquery", "handlebars"], function ($, handlebars) {
-    var controls = {};
     var ComboBox = (function () {
         function ComboBox(content) {
             this.content = content;
@@ -59,12 +58,21 @@ define(["jquery", "handlebars"], function ($, handlebars) {
         return ComboBox;
     }());
 
-    controls.ComboBox = function (contentArray) {
-        if (!(contentArray instanceof Array)) {
-            throw { name: 'ComboBox exception', message: 'ComboBox items should be an Array' };
-        }
-        return new ComboBox(contentArray);
-    };
+    //controls.ComboBox = function (contentArray) {
+    //    if (!(contentArray instanceof Array)) {
+    //        throw { name: 'ComboBox exception', message: 'ComboBox items should be an Array' };
+    //    }
+    //    return new ComboBox(contentArray);
+    //};
+    //
+    //return controls;
 
-    return controls;
+    return {
+        ComboBox : function (contentArray) {
+            if (!(contentArray instanceof Array)) {
+                throw { name: 'ComboBox exception', message: 'ComboBox items should be an Array' };
+            }
+            return new ComboBox(contentArray);
+        }
+    }
 });

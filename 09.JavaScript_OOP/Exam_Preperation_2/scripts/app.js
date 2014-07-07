@@ -28,11 +28,16 @@
 
       jsOopCourse.calculateResults();
 
+    //  console.log(jsOopCourse.getStudents());
+
       var topByExam = jsOopCourse
         .getTopStudentsByExam(5);
+
+     // console.log(topByExam);
 
       var topByTotalScore = jsOopCourse
         .getTopStudentsByTotalScore(5);
 
+     console.log(topByTotalScore);
     });
 }());
