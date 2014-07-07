@@ -38,7 +38,7 @@
     }
 
 
-    Scores = (function (scoresWidth, scoresHeight) {
+    Scores = function (scoresWidth, scoresHeight) {
         function Scores(scoresWidth, scoresHeight) {
             scoresContainer.style.width = scoresWidth + 'px';
             scoresContainer.style.height = scoresHeight + 'px';
@@ -91,7 +91,7 @@
         }());
 
         return Scores;
-    }());
+    }();
 
     return { // score module
         getScoresBoard: function (scoresWidth, scoresHeight) {

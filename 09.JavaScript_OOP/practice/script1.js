@@ -39,7 +39,7 @@ var module1 = (function () {
 
         return Rect;
     }());
-
+    console.log( 'script1');
     var r = new Rect(0, 0, 10, 10);
     console.log(r.calcArea());
     r._width = 5;

@@ -17,7 +17,6 @@ define(function () {
           for (var i = 0; i < this._students.length; i++) {
               this._students[i].totalScore = this._scoreformula(this._students[i]);
           };
-
         };
 
         Course.prototype.getStudents = function () {

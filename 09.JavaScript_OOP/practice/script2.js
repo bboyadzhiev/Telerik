@@ -19,10 +19,14 @@ var modle2 = (function () {
 
         return Shape;
     }());
+    
 
+    console.log( 'script2');
     var s = new Shape(5, 5, 10, 11);
     console.log(s.calcArea());
     s._width = 9;
     console.log(s.calcArea());
 
 }());
+
+var iife = function () { console.log("invoked!"); }();

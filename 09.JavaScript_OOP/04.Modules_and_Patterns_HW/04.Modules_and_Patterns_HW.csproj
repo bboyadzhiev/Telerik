@@ -57,6 +57,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\body.png" />
+    <Content Include="images\border.png" />
+    <Content Include="images\ground.png" />
+    <Content Include="images\head.png" />
+    <Content Include="images\headDown.png" />
+    <Content Include="images\headLeft.png" />
+    <Content Include="images\headRight.png" />
+    <Content Include="images\headUp.png" />
+    <Content Include="images\item.png" />
     <Content Include="scripts\snakeCanvas.js" />
     <Content Include="scripts\snakeEngine.js" />
     <Content Include="scripts\scores.js" />
@@ -74,9 +83,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -12,7 +12,8 @@ var snakeCanvas = function () {
         headRight: "images/headRight.png",
         playground: "images/ground.png",
         border: "images/border.png",
-        item: "images/item.png"
+        item: "images/item.png",
+        obstacle: "images/obstacle.png"
     };
     
     var canvas = document.getElementById('snakeCanvas');
@@ -45,6 +46,12 @@ var snakeCanvas = function () {
         SnakeCanvas.prototype.drawItems = function (items) {
             for (var i = 0; i < items.length; i++) {
                 drawTile(elements.item, items[i].x * ELEMENT_SIZE, items[i].y * ELEMENT_SIZE, ELEMENT_SIZE, ELEMENT_SIZE);
+            }
+        }
+
+        SnakeCanvas.prototype.drawObstacles = function (obstacles) {
+            for (var i = 0; i < obstacles.length; i++) {
+                drawTile(elements.obstacle, obstacles[i].x * ELEMENT_SIZE, obstacles[i].y * ELEMENT_SIZE, ELEMENT_SIZE, ELEMENT_SIZE);
             }
         }
 
