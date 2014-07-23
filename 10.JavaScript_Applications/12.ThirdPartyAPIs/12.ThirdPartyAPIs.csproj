@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2F5BB02F-28B2-4DBD-9256-AFEAEFD1EC42}</ProjectGuid>
+    <ProjectGuid>{6A1EAD4A-26C2-4CEE-BEFC-7608BD6CF531}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_04.Modules_and_Patterns_HW</RootNamespace>
-    <AssemblyName>04.Modules_and_Patterns_HW</AssemblyName>
+    <RootNamespace>_12.ThirdPartyAPIs</RootNamespace>
+    <AssemblyName>12.ThirdPartyAPIs</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -57,20 +57,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\body.png" />
-    <Content Include="images\border.png" />
-    <Content Include="images\ground.png" />
-    <Content Include="images\head.png" />
-    <Content Include="images\headDown.png" />
-    <Content Include="images\headLeft.png" />
-    <Content Include="images\headRight.png" />
-    <Content Include="images\headUp.png" />
-    <Content Include="images\item.png" />
-    <Content Include="images\obstacle.png" />
-    <Content Include="scripts\snakeCanvas.js" />
-    <Content Include="scripts\snakeEngine.js" />
-    <Content Include="scripts\scores.js" />
-    <Content Include="Snake.html" />
+    <Content Include="GoogleAPI\01.SimpleMap.html" />
+    <Content Include="GoogleAPI\02.GeolocationAndInformation.html" />
+    <Content Include="GoogleAPI\03.MarkerAndEvents.html" />
+    <Content Include="GoogleAPI\04.YouTubePlayer.html" />
+    <Content Include="GoogleAPI\scripts\geolocation.js" />
+    <Content Include="GoogleAPI\scripts\marker-event.js" />
+    <Content Include="GoogleAPI\scripts\simple-map.js" />
+    <Content Include="GoogleAPI\scripts\youtube-player.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +78,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -98,9 +91,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2584</DevelopmentServerPort>
+          <DevelopmentServerPort>1151</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2584/</IISUrl>
+          <IISUrl>http://localhost:1151/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
