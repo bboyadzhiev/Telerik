@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sheeps and Rams</title>
+    <script src="scripts/web-storage-objects.js"></script>
+    <script src="scripts/libs/underscore.js"></script>
+    <script src="scripts/sheepsAndRamsEngine.js"></script>
+    <style type="text/css">
+        #highscores {
+            position: absolute;
+            width: 200px;
+            height: 300px;
+            top: 100px;
+            left: 100px;
+            border: 1px solid black;
+            text-align: center;
+            background-color:white;
+        }
+
+        div .hiddenDiv {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sheeps And Rams</h1>
+    <div id="sheepsRamsContainer">
+        <div class="game">
+            <input type="text" id="playerCode" value="" />
+            <input type="button" name="name" value="Check the code" onclick="sheepsAndRams.testCode()" />
+            <input type="button" name="name" value="Restart Game" onclick="sheepsAndRams.restartGame()" />
+        </div>
+        <div id="highscores" class="hiddenDiv">
+        </div>
+    </div>
+    <script src="scripts/highscores.js"></script>
+    <script type="text/javascript">
+
+        var game = sheepsAndRams.startGame("player", "playerCode", "sheepsRamsContainer", "highscores");
+
+    </script>
+</body>
+</html>
