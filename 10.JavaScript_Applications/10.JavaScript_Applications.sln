@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.Spa_Apps_HW", "09.Spa_Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.SPA_Applications_HW", "09.SPA_Applications_HW\09.SPA_Applications_HW.csproj", "{28D971DC-E47D-4C99-AD7C-10DD9A1DC227}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXAM", "EXAM\EXAM.csproj", "{573230FA-9ACB-431B-815D-660E131197FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{28D971DC-E47D-4C99-AD7C-10DD9A1DC227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D971DC-E47D-4C99-AD7C-10DD9A1DC227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D971DC-E47D-4C99-AD7C-10DD9A1DC227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{573230FA-9ACB-431B-815D-660E131197FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{573230FA-9ACB-431B-815D-660E131197FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{573230FA-9ACB-431B-815D-660E131197FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{573230FA-9ACB-431B-815D-660E131197FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
