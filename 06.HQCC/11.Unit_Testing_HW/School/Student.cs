@@ -26,7 +26,13 @@ namespace School
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set {
+                if (string.IsNullOrEmpty(value) || value.Length < 3)
+                {
+                    throw new ArgumentException("Invalid name for a student");
+                } 
+                name = value;
+            }
         }
 
         public Student(string name, int ssn)

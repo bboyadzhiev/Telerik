@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace School
 {
-
-
     public class School
     {
         private const int MIN_ID_NUMBER = 10000;
@@ -19,22 +17,17 @@ namespace School
         {
             get { return students; }
         }
-        
+
         private IList<Course> courses;
 
         public IList<Course> Courses
         {
-            get { return courses; }
+            get { return new List<Course>(this.courses); }
             set
             {
-                if (courses.Contains((Course)value))
-                {
-                    throw new ArgumentException("Course already added!");
-                }
-                courses = value;
+                this.courses = value;
             }
         }
-
 
         private string name;
 
@@ -43,7 +36,6 @@ namespace School
             get { return name; }
             set { name = value; }
         }
-
 
         public bool IsSsnAvailable(Student student)
         {
@@ -170,9 +162,14 @@ namespace School
 
         public void AddCourse(Course course)
         {
+            if (this.courses.Contains((Course)course))
+            {
+                throw new ArgumentException("Course already added!");
+            }
             this.Name = name;
-            this.courses.Add(course);
+            //this.courses.Add(course);
+
+            this.Courses.Add(course);
         }
     }
-
 }

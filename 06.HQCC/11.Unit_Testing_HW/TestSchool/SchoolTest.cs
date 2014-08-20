@@ -70,7 +70,7 @@ namespace TestSchool
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestIDOutOfMinimumRange()
         {
             School.School school = new School.School("n-to osnovno");
@@ -78,7 +78,7 @@ namespace TestSchool
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestIDOutOfMaximumRange()
         {
             School.School school = new School.School("n-to osnovno");
@@ -147,6 +147,24 @@ namespace TestSchool
             school.GetStudentID(pesho);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestRemovingInvalidStudenByReference()
+        {
+            School.School school = new School.School("n-to osnovno");
+            Student unassignedStudent = new Student("Gosho", 222);
+            school.RemoveStudent(unassignedStudent);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestRemovingInvalidStudenByID()
+        {
+            School.School school = new School.School("n-to osnovno");
+            Student pesho = school.CreateStudent("Pesho", 2, 10002);
+            school.RemoveStudent(10008);
+        }
+
 
 
         [TestMethod]
@@ -157,6 +175,26 @@ namespace TestSchool
             school.AddCourse(course);
 
             Assert.AreEqual(school.Courses[0].CourseName, course.CourseName);
+        }
+
+        [TestMethod]
+        public void TestSchoolName()
+        {
+            var schoolName = "n-to osnovno";
+            School.School school = new School.School(schoolName);
+            Course course = new Course("math");
+
+            Assert.AreEqual(school.Name, schoolName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestAddingSameCourse()
+        {
+            School.School school = new School.School("n-to osnovno");
+            Course course = new Course("math");
+            school.AddCourse(course);
+            school.AddCourse(course);
         }
     }
 }
