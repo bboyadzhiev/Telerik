@@ -1,0 +1,70 @@
+01. What database models do you know?
+- Hierarchical (tree)
+- Network / graph
+- Relational (table)
+- Object-oriented
+
+02. Which are the main functions performed by a Relational Database Management System (RDBMS)?
+- RDBMS manage data stored in tables
+- implement data manipulation both with the tables and the data stored in them
+- support the SQL language
+- may sypport transaction management
+
+03. Define what is "table" in database terms.
+ - "table" represents data that is arranged in rows(sets of actual data) and columns(data definition of every field in the set)
+
+04. Explain the difference between a primary and a foreign key.
+- Primary key is a column of the table filled with values, that are used to uniquely identify a row (record) of the same table.
+- Foreign key is a column of the table filled with values, that are used to uniquely identify a row (record) of another table.
+
+05. Explain the different kinds of relationships between tables in relational databases.
+- One-to-one relationship - a single record of the current table is related to a single record in the other table.
+	Can be used to implement inheritance of the sort Student: Person and Teacher: Person
+- One-to-many relationship - a single record in a table corresponds to a single record in the other table.
+	Used to implement aggregational type of relation - one country has one or many cities.
+	It's the most commonly used relation. 
+
+06. When is a certain database schema normalized? What are the advantages of normalized databases?
+- Normalization removes data repetition in tables.
+- The deeper the normalization is - the easier the data manipulation is, but it slows down the performance.
+
+07. What are database integrity constraints and when are they used?
+- Integrity constraints ensure data integrity in the tables. They enforce data rules which cannot be violated.
+	- Primary Key constraint - ensures that the primary key of a table has unique value for each table row.
+	- Unique key constraint - ensures that all values in a certain colum(or more colums) are unique. 
+	- Foreign key constraint - ensures that the value in given column is a key from another table.
+	- Check constraint - ensures that value in certain colum meet some predefined condition.
+
+08. Point out the pros and cons of using indexes in a database.
+Pros:
+ - Indices speed up searching of values in a certain colum or group of columns.
+ - Can be built-in in the tables (clustered) ot stored externally (non-clustered).
+ Cons:
+ - Adding and deleting records in indexed tables is slower.
+
+
+09. What's the main purpose of the SQL language?
+The main purpose if SQL is the manipulation of data, stored in a relational database.
+SQL consists of:
+ - DDL (Data Definition Language) - defining the structure of the data - Create, Alter, Drop
+ - DML (Data Manipulation Language) - for manipulating the data - Select, Insert, Update, Delete
+
+10. What are transactions used for? Give an example.
+Transactions are a sequence of database operations which are executed as a single unit:
+- Either all of them execute successfully or none of them is executed.
+Example - a bank transfer from one account to another. Withdrawal from the first and deposit into the second account. 
+If either the withdrawal of the deposit fails the entire operation should be cancelled.
+
+11. What is a NoSQL database?
+NoSQL is a non-relational database that uses document-based model.
+
+12. Explain the classical non-relational data models.
+NoSQL databases use document-based model. 
+It`s a schema-free document storage that still supports CRUD, indexing, querying, concurrency and transactions.
+It`s highly optimized for append/retreive and has a great performance and scalability.
+
+
+13. Give few examples of NoSQL databases and their pros and cons.
+- MongoDB - JSON-document based database.
+- CouchDB - JSON-document based database with REST API.
+- Cassandra - Distributed wide-column database.
