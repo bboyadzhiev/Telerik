@@ -41,7 +41,6 @@ namespace _03.Combinations_without_duplicates
                 }
                 Rec(array, index + 1, j+1, elementsCount, combinationLength);
             }
-
         }
 
         static void Print(int i, int[] arr)

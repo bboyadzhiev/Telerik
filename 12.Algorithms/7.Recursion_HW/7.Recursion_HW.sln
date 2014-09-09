@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Combinations_without_dup
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.All_permutations_of_N", "04.All_permutations_of_N\04.All_permutations_of_N.csproj", "{B9E917A1-0A4B-4C80-B275-E1331FACABB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.Ordered_K-element_subset_from_N-element_set", "05.Ordered_K-element_subset_from_N-element_set\05.Ordered_K-element_subset_from_N-element_set.csproj", "{1A36E00B-00AB-4709-ABB0-ADF7396BF549}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.All_subsets_of_K_strings", "06.All_subsets_of_K_strings\06.All_subsets_of_K_strings.csproj", "{5FB25608-83A3-4C22-824C-2F8DD9CF69CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.Find_all_paths_between_two_labyrinth_cells", "07.Find_all_paths_between_two_labyrinth_cells\07.Find_all_paths_between_two_labyrinth_cells.csproj", "{0E4A6F5D-B2E8-4C7A-864F-A764DCD0B8EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,18 @@ Global
 		{B9E917A1-0A4B-4C80-B275-E1331FACABB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9E917A1-0A4B-4C80-B275-E1331FACABB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9E917A1-0A4B-4C80-B275-E1331FACABB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A36E00B-00AB-4709-ABB0-ADF7396BF549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A36E00B-00AB-4709-ABB0-ADF7396BF549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A36E00B-00AB-4709-ABB0-ADF7396BF549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A36E00B-00AB-4709-ABB0-ADF7396BF549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FB25608-83A3-4C22-824C-2F8DD9CF69CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB25608-83A3-4C22-824C-2F8DD9CF69CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB25608-83A3-4C22-824C-2F8DD9CF69CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB25608-83A3-4C22-824C-2F8DD9CF69CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4A6F5D-B2E8-4C7A-864F-A764DCD0B8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4A6F5D-B2E8-4C7A-864F-A764DCD0B8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4A6F5D-B2E8-4C7A-864F-A764DCD0B8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4A6F5D-B2E8-4C7A-864F-A764DCD0B8EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
