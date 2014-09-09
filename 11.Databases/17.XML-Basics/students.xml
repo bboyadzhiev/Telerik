@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<students>
+	<student name="John Doe" sex="male" birth-date="2000-01-01" phone="0888777666" e-mail="john@doe.com" couse="Telerik Academy" specialty="Web dev" fnumber="12345678">
+		<exams>
+			<exam name="C# Part I" tutor="Ivaylo Kenov" score="300"></exam>
+			<exam name="C# Part II" tutor="Ivaylo Kenov" score="350"></exam>
+		</exams>
+	</student>
+	<student name="Jane Doe" sex="female" birth-date="2001-01-01" phone="0888777888" e-mail="jane@doe.com" couse="Telerik Academy" specialty="Web dev" fnumber="12345679">
+		<exams>
+			<exam name="C# Part I" tutor="Ivaylo Kenov" score="325"></exam>
+			<exam name="C# Part II" tutor="Ivaylo Kenov" score="325"></exam>
+		</exams>
+	</student>
+</students>

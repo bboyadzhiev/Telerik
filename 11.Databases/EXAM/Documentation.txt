@@ -1,0 +1,23 @@
+Connection string for "Company" database: .\SQLEXPRESS
+	- can be changed in-code
+
+Connection string for "Cars" database: .\SQLEXPRESS
+	- can be changed in-code
+
+Relationships for "Company" database: 
+(Projects: EmployeesProjects - one -to many)
+(Employees: EmployeesProjects - one -to many)
+
+EmployeesProjects - defines a many-to-many relation with Projects and Employees 
+
+(Employees: Reports - one-to-many)
+(Employees: Employees - one-to-many - one employee can be manager to many employees)
+
+(Departments: Employees - one-to-many)
+
+Relationships for "Cars" database: 
+(Cities : Dealers - one-to-many -one city can have many dealers)
+(Dealers: Cars - one to many - one dealer can sullply many cars)
+(Manufacturers : Cars - one to many - one manufacturer can produce many cars)
+
+Query files: (\1.DB_First_Company\.....)

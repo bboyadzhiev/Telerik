@@ -1,0 +1,7 @@
+-	Table Employees has a FK to itself fo the relation "each employee has a manager", that is not null  to satisfy the condition "some employees do not have managers": FK_Employees_Employees (Employees.ManagerId -> Employees.EmployeeId, not null)
+
+-	Table Employees has a FK relation to Departments as FK_Employees_Departments (Employaees.DepartmentId -> Departments.Id) to satisfy the condition "each employee has a department"
+
+-	Table EmployeesProjects accomplishes the condition "each employee works on many projects". It consists of a composite key of two FK's (EmployeesProjects.EmployeeId = > Employees.Id, EmployeesProjects.ProjectId = > Projects.Id)
+
+- 	Table Reports accomplishes the condition "each employee has to report every day"

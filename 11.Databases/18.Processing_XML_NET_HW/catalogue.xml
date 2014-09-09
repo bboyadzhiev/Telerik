@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<catalogue>
+		<album>
+			<name>Album 1</name>
+			<artist>Some artist</artist>
+			<producer>Producer 1</producer>
+			<price>5</price>
+			<songs>
+				<song>
+					<title>Intro</title>
+					<duration>1:30</duration>
+				</song>
+				<song>
+					<title>Single 1</title>
+					<duration>5:30</duration>
+				</song>
+				<song>
+					<title>Outro</title>
+					<duration>3:30</duration>
+				</song>
+			</songs>
+		</album>
+		<album>
+			<name>Album 2</name>
+			<artist>Some body</artist>
+			<producer>Producer 1</producer>
+			<price>10</price>
+			<songs>
+				<song>
+					<title>Welcome</title>
+					<duration>2:33</duration>
+				</song>
+				<song>
+					<title>The Single</title>
+					<duration>5:33</duration>
+				</song>
+			</songs>
+		</album>
+		<album>
+			<name>Album 3</name>
+			<artist>Some body</artist>
+			<producer>Producer 1</producer>
+			<price>12</price>
+			<songs>
+				<song>
+					<title>Welcome Back</title>
+					<duration>1:33</duration>
+				</song>
+				<song>
+					<title>The Single Revisited</title>
+					<duration>6:33</duration>
+				</song>
+			</songs>
+		</album>
+</catalogue>
