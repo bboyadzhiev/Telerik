@@ -1,6 +1,8 @@
 -- Write a SQL query to find all managers that have exactly 5 employees. 
 -- Display their first name and last name.
 USE TelerikAcademy
+GO
+
 SELECT  m.FirstName, m.LastName
 FROM Employees e
 	INNER JOIN Employees m

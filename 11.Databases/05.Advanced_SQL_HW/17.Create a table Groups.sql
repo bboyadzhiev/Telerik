@@ -15,4 +15,3 @@ CREATE TABLE Groups(
 	CONSTRAINT uq_GroupName UNIQUE(GroupName)
 	)
 GO
-

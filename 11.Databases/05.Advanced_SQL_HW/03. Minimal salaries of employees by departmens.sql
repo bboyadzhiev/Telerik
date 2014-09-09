@@ -1,5 +1,8 @@
-/*Minimal salaries of employees by departmens*/
+-- Write a SQL query to find the full name, salary and department of the employees that take the minimal salary in their department. 
+-- Use a nested SELECT statement.
 USE TelerikAcademy
+GO
+
 SELECT e.FirstName +' '+ 
 CASE WHEN LEN(e.MiddleName) = 1 
 	THEN  e.MiddleName+'. '
