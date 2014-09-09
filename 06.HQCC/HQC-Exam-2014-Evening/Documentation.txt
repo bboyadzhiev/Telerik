@@ -1,0 +1,46 @@
+Design pattern: Simple Factory
+	* The CommandsParser's  ComputerCommandsParser class
+
+Design pattern: Strategy
+	* implemented in the Computers.AbstractFactory namespace
+	The AbstractComputerManufacturer implements Strategy as each Manufacturer (HP, Dell, Lenovo) makes  computers their way (HP.MakePC vs Dell.MakePC() vs Lenovo.MakePC)
+
+Design pattern: Template Method
+	* AbstractFactory - > AbstractComputer.cs
+
+Design pattern: Abstract factory
+	* implemented in the Computers.AbstractFactory namespace
+The ManufacturerFactory class produces computerDealer that operates with the parsed manufacturer
+
+Design pattern: Composite
+	* 
+
+Design pattern: Mediator
+	* 
+
+Found bottlenecks:
+	* there were multiple methods for SquareNumber
+	* 
+
+Found bugs: 
+--- Please look at the "Comments" of the "Task List" of VS ------
+--- I have just commented the bad code for the peer review ------
+	* CPU constructor, parameter HardDrive (videoCard) was never assigned!
+	* HP Server's harddrive was build with 0GB
+	* 
+
+Single responsibility principle
+	* the Battery for instance is responsible for things like Charging itself, it doesn't draw or something
+	* actually I have tried to make every computer component this way
+
+Open/closed principle
+	* the ICPU interface for instance
+
+Liskov substitution principle
+	* 
+
+Interface segregation principle
+	* 
+
+Dependency inversion principle
+	* I tried to create more interfaces

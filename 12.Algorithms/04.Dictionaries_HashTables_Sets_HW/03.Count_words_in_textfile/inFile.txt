@@ -1,0 +1,13 @@
+Start your computer from a Windows 7 installation disc or USB flash drive
+Applies to Windows 7
+
+You might need to start, or boot, your computer using the Windows 7 installation disc or a USB flash drive if you want to:
+
+    Install or reinstall Windows 7. For detailed instructions on installing Windows 7, see Installing and reinstalling Windows 7. For information about downloading Windows 7, and then creating a USB flash drive to install Windows 7, go to Installing Windows 7 on a netbook on the Windows website.
+
+    Recover Windows 7 from a serious error. If your computer won't start Windows at all, you can access Startup Repair and other tools in the System Recovery Options menu from the Windows 7 installation disc or USB flash drive. These tools can help you get Windows 7 running again. For more information, see Startup Repair: frequently asked questions and What are the system recovery options in Windows 7?
+
+Note
+
+This is the TEXT. Text, text, text – THIS TEXT! Is this the text?
+

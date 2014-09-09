@@ -1,0 +1,24 @@
+Task 1
+1. Algorithm does this:
+   For every elemnt n in the array we are accessing every element m in the same array
+2. Assuming worst-case scenario: arr[j] > arr[j+1] for every j(0, m-1), where 'start' will always be 0 until 'end' reaches 0 (m iterations)
+3. In this code m = n
+=> the running time of the code is O(n*n)
+
+Task 2
+1. Algorithm does this:
+   For every row (n) we are checking if every first element of the row is even and if so we are entering the second loop
+2. Assuming worst-case scenario - every first element of every row is even number, so second loop will be executed m-times
+=> the worst running time will be O(n*m) 
+=> the best running time will be O(n) (every first element of every row is even number)
+
+Task3*
+1. Algorithm does this: 
+   For every 'col' (n) : we are checking if the next 'row' index (m) has reached the last 'row' and if not, do it all recursively again for the next 'row' index, intil the last 'row' is reached:
+  n,m1 * n,m2 * ... * n,m(last) *
+* n1,m1 * n1,m2 * ... * n1,m(last) *
+* ............................
+* n(last),m1 * n(last),m2 * ... * n(last),m(last)
+
+2. Values of the matrix are of no meaning to the algorithm's running time
+=> the running time of the code is O(n!*m!)
