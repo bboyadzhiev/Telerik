@@ -12,6 +12,7 @@ namespace MusicLibrary.Data.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+            ContextKey = "MusicLibrary.Data.MusicLibraryDbContext";
         }
 
         protected override void Seed(MusicLibrary.Data.MusicLibraryDbContext context)
@@ -21,7 +22,9 @@ namespace MusicLibrary.Data.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.    
             this.SeedArtists(context);
+            context.SaveChanges();
             this.SeedSongs(context);
+            context.SaveChanges();
             this.SeedAlbums(context);
         }
 
@@ -84,7 +87,7 @@ namespace MusicLibrary.Data.Migrations
                               Title = "Nth Symphony",
                               Artist = ctx.Artists.Where(x => x.Name == "Amadeus Mozart").FirstOrDefault(),
                               Year = DateTime.Now,
-                              Genre = Genre.Pop
+                              Genre = Genre.Classic
                           }
                 );
         }

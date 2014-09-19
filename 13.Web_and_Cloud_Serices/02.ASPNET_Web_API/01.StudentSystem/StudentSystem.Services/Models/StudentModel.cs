@@ -14,6 +14,7 @@ namespace StudentSystem.Services.Models
         public string LastName { get; set; }
         public int Level { get; set; }
 
+
         public StudentInfo AdditionalInformation { get; set; }
 
         public static Expression<Func<Student, StudentModel>> FromStudentCFModel

@@ -67,6 +67,7 @@ namespace StudentSystem.Services.Controllers
             }
 
             studentModel.UpdateStudent(student);
+            this.data.SaveChanges();
             return this.Request.CreateResponse(HttpStatusCode.OK, student);
 
         }
@@ -80,6 +81,7 @@ namespace StudentSystem.Services.Controllers
             }
 
             this.data.Students.Delete(id);
+            this.data.SaveChanges();
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
 

@@ -22,7 +22,13 @@ namespace StudentSystem.Services.Controllers
             this.data = new StudentSystemData();
         }
 
-        public HttpResponseMessage Post(int studentId, Guid courseID)
+        /// <summary>
+        /// Subscribes a student to a course
+        /// </summary>
+        /// <param name="studentId">The sudent's id</param>
+        /// <param name="courseGuid">The dourse's Guid</param>
+        /// <returns></returns>
+        public HttpResponseMessage Post(int studentId, Guid courseGuid)
         {
                   
             var student = this.data.Students.All().Where(x => x.StudentIdentification == studentId).FirstOrDefault();
@@ -31,13 +37,15 @@ namespace StudentSystem.Services.Controllers
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Student not found!");
             }
 
-            var course = this.data.Courses.All().Where(x => x.Id == courseID).FirstOrDefault();
+            var course = this.data.Courses.All().Where(x => x.Id == courseGuid).FirstOrDefault();
             if (course == null)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Course not found!");
             }
             student.Courses.Add(course);
             //course.Students.Add(student);
+            this.data.SaveChanges();
+            
 
             return this.Request.CreateResponse(HttpStatusCode.OK,
                 new
@@ -51,7 +59,13 @@ namespace StudentSystem.Services.Controllers
                 });
         }
 
-        public HttpResponseMessage Delete(int studentId, Guid courseID)
+        /// <summary>
+        /// Removes student from a course
+        /// </summary>
+        /// <param name="studentId">The sudent's id</param>
+        /// <param name="courseGuid">The dourse's Guid</param>
+        /// <returns></returns>
+        public HttpResponseMessage Delete(int studentId, Guid courseGuid)
         {
             var student = this.data.Students.All().Where(x => x.StudentIdentification == studentId).FirstOrDefault();
             if (student == null)
@@ -59,7 +73,7 @@ namespace StudentSystem.Services.Controllers
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Student not found!");
             }
 
-            var course = this.data.Courses.All().Where(x => x.Id == courseID).FirstOrDefault();
+            var course = this.data.Courses.All().Where(x => x.Id == courseGuid).FirstOrDefault();
             if (course == null)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Course not found!");
@@ -69,6 +83,7 @@ namespace StudentSystem.Services.Controllers
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "The student is not enrolled in this course!");
             }
             student.Courses.Remove(course);
+            this.data.SaveChanges();
 
             return this.Request.CreateResponse(HttpStatusCode.OK,
                 new

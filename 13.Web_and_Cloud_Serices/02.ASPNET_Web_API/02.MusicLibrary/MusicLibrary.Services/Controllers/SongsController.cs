@@ -1,118 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
-using MusicLibrary.Models;
 using MusicLibrary.Data;
+using MusicLibrary.Services.Models;
 
 namespace MusicLibrary.Services.Controllers
 {
-    public class SongsController : ApiController
+    public class SongsController : ApiController, IRESTController<SongDataModel>
     {
-        private MusicLibraryDbContext db = new MusicLibraryDbContext();
+        private IMusicLibraryData data;
 
-        // GET api/Songs
-        public IQueryable<Song> GetSongs()
+        public SongsController()
         {
-            return db.Songs;
+            this.data = new MusicLibraryData();
+        }
+        public IHttpActionResult Get()
+        {
+            var songs = this.data.Songs.All().Select(SongDataModel.FromSongEFModel);
+            return Ok(songs);
         }
 
-        // GET api/Songs/5
-        [ResponseType(typeof(Song))]
-        public IHttpActionResult GetSong(int id)
+        public IHttpActionResult Get(int id)
         {
-            Song song = db.Songs.Find(id);
+            var song = this.data.Songs.All().Where(x => x.Id == id).Select(SongDataModel.FromSongEFModel).FirstOrDefault();
+            if (song == null)
+            {
+                return NotFound();
+            }
+            return Ok(song);
+        }
+
+        public IHttpActionResult Post(SongDataModel model)
+        {
+            var song = model.CreateSong();
+            data.Songs.Add(song);
+            data.SaveChanges();
+            return Ok(model);
+        }
+
+        public IHttpActionResult Put(SongDataModel model)
+        {
+            var song = this.data.Songs.All().Where(x => x.Id == model.Id).FirstOrDefault();
             if (song == null)
             {
                 return NotFound();
             }
 
-            return Ok(song);
+            model.UpdateSong(song);
+            this.data.SaveChanges();
+            return Ok(model);
         }
 
-        // PUT api/Songs/5
-        public IHttpActionResult PutSong(int id, Song song)
+        public IHttpActionResult Delete(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != song.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(song).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SongExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST api/Songs
-        [ResponseType(typeof(Song))]
-        public IHttpActionResult PostSong(Song song)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Songs.Add(song);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = song.Id }, song);
-        }
-
-        // DELETE api/Songs/5
-        [ResponseType(typeof(Song))]
-        public IHttpActionResult DeleteSong(int id)
-        {
-            Song song = db.Songs.Find(id);
+            var song = this.data.Songs.All().Where(x => x.Id == id).FirstOrDefault();
             if (song == null)
             {
                 return NotFound();
             }
 
-            db.Songs.Remove(song);
-            db.SaveChanges();
+            this.data.Songs.Delete(id);
+            this.data.SaveChanges();
 
-            return Ok(song);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool SongExists(int id)
-        {
-            return db.Songs.Count(e => e.Id == id) > 0;
+            return Ok();
         }
     }
 }

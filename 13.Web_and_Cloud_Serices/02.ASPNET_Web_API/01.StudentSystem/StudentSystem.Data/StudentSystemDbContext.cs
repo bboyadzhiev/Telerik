@@ -32,9 +32,9 @@
             return base.Set<T>();
         }
 
-        public new void SaveChanges()
+        public new int SaveChanges()
         {
-            base.SaveChanges();
+            return base.SaveChanges();
         }
     }
 }

@@ -4,6 +4,7 @@
     using StudentSystem.Models;
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
 
     public class StudentSystemData : IStudentSystemData
     {
@@ -20,7 +21,7 @@
         {
         }
 
-        public IGenericRepository<Course> Courses
+        public IRepository<Course> Courses
         {
             get
             {
@@ -28,7 +29,7 @@
             }
         }
 
-        public IGenericRepository<Test> Tests
+        public IRepository<Test> Tests
         {
             get
             {
@@ -44,9 +45,9 @@
             }
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            this.context.SaveChanges();
+            return this.context.SaveChanges();
         }
 
         public StudentSystemData(IStudentSystemDbContext context)
@@ -55,12 +56,12 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
-        private IGenericRepository<T> GetRepository<T>() where T : class
+        private IRepository<T> GetRepository<T>() where T : class
         {
             var typeOfModel = typeof(T);
             if (!this.repositories.ContainsKey(typeOfModel))
             {
-                var type = typeof(GenericRepository<T>);
+                var type = typeof(EFRepository<T>);
 
                 if (typeOfModel.IsAssignableFrom(typeof(Student)))
                 {
@@ -70,11 +71,11 @@
                 this.repositories.Add(typeOfModel, Activator.CreateInstance(type, this.context));
             }
 
-            return (IGenericRepository<T>)this.repositories[typeOfModel];
+            return (IRepository<T>)this.repositories[typeOfModel];
         }
 
 
-        public IGenericRepository<Homework> Homeworks
+        public IRepository<Homework> Homeworks
         {
             get 
             {

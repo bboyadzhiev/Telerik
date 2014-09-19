@@ -12,15 +12,15 @@ namespace MusicLibrary.Data
     public class MusicLibraryDbContext : DbContext, IMusicLibraryDbContext
     {
         public MusicLibraryDbContext()
-            : base("MusicLibraryConnection")
+            : base("MusicLibrary")
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicLibraryDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicLibraryDbContext, Configuration>());
         }
         public MusicLibraryDbContext(string connectionString)
-            : base("MusicLibraryConnection")
+            : base("MusicLibrary")
         {
             this.Database.Connection.ConnectionString = connectionString;
-           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicLibraryDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicLibraryDbContext, Configuration>());
         }
 
         public IDbSet<Artist> Artists { get; set; }
@@ -31,9 +31,10 @@ namespace MusicLibrary.Data
             return base.Set<T>();
         }
 
-        public new void SaveChanges()
+        public new int SaveChanges()
         {
-            base.SaveChanges();
+           return base.SaveChanges();
         }
+
     }
 }

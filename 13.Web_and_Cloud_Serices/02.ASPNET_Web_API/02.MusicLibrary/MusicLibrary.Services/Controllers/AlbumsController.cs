@@ -1,118 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
-using MusicLibrary.Models;
 using MusicLibrary.Data;
+using MusicLibrary.Services.Models;
 
 namespace MusicLibrary.Services.Controllers
 {
-    public class AlbumsController : ApiController
+    public class AlbumsController : ApiController, IRESTController<AlbumDataModel>
     {
-        private MusicLibraryDbContext db = new MusicLibraryDbContext();
+        private IMusicLibraryData data;
 
-        // GET api/Albums
-        public IQueryable<Album> GetAlbums()
+        public AlbumsController()
         {
-            return db.Albums;
+            this.data = new MusicLibraryData();
         }
 
-        // GET api/Albums/5
-        [ResponseType(typeof(Album))]
-        public IHttpActionResult GetAlbum(int id)
+        public IHttpActionResult Get()
         {
-            Album album = db.Albums.Find(id);
+            var albums = this.data.Albums.All().Select(AlbumDataModel.FromAlbumEFModel);
+            return Ok(albums);
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            var album = this.data.Albums.All().Where(x => x.Id == id).Select(AlbumDataModel.FromAlbumEFModel).FirstOrDefault();
+            if (album == null)
+            {
+                return NotFound();
+            }
+            return Ok(album);
+        }
+
+        public IHttpActionResult Post(AlbumDataModel model)
+        {
+            var album = model.CreateAlbum();
+            data.Albums.Add(album);
+            data.SaveChanges();
+            return Ok(model);
+        }
+
+        public IHttpActionResult Put(AlbumDataModel model)
+        {
+            var album = this.data.Albums.All().Where(x => x.Id == model.Id).FirstOrDefault();
             if (album == null)
             {
                 return NotFound();
             }
 
-            return Ok(album);
+            model.UpdateAlbum(album);
+            this.data.SaveChanges();
+            return Ok(model);
         }
 
-        // PUT api/Albums/5
-        public IHttpActionResult PutAlbum(int id, Album album)
+        public IHttpActionResult Delete(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != album.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(album).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AlbumExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST api/Albums
-        [ResponseType(typeof(Album))]
-        public IHttpActionResult PostAlbum(Album album)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Albums.Add(album);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = album.Id }, album);
-        }
-
-        // DELETE api/Albums/5
-        [ResponseType(typeof(Album))]
-        public IHttpActionResult DeleteAlbum(int id)
-        {
-            Album album = db.Albums.Find(id);
+            var album = this.data.Albums.All().Where(x => x.Id == id).FirstOrDefault();
             if (album == null)
             {
                 return NotFound();
             }
 
-            db.Albums.Remove(album);
-            db.SaveChanges();
+            this.data.Albums.Delete(id);
+            this.data.SaveChanges();
 
-            return Ok(album);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool AlbumExists(int id)
-        {
-            return db.Albums.Count(e => e.Id == id) > 0;
+            return Ok();
         }
     }
 }

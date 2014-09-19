@@ -31,48 +31,36 @@ namespace MusicLibrary.Data
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public Repositories.IGenericRepository<Models.Album> Albums
+        public IRepository<Models.Album> Albums
         {
             get
             {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                return this.GetRepository<Album>();
             }
         }
 
-        public Repositories.IGenericRepository<Models.Artist> Artists
+        public IRepository<Models.Artist> Artists
         {
             get
             {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                return this.GetRepository<Artist>();
             }
         }
 
-        public Repositories.IGenericRepository<Models.Song> Songs
+        public IRepository<Models.Song> Songs
         {
             get
             {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                return this.GetRepository<Song>();
             }
         }
 
-        public IGenericRepository<T> GetRepository<T>() where T : class
+        public IRepository<T> GetRepository<T>() where T : class
         {
             var typeOfModel = typeof(T);
             if (!this.repositories.ContainsKey(typeOfModel))
             {
-                var type = typeof(GenericRepository<T>);
+                var type = typeof(EFRepository<T>);
 
                 if (typeOfModel.IsAssignableFrom(typeof(Album)))
                 {
@@ -82,7 +70,13 @@ namespace MusicLibrary.Data
                 this.repositories.Add(typeOfModel, Activator.CreateInstance(type, this.context));
             }
 
-            return (IGenericRepository<T>)this.repositories[typeOfModel];
+            return (IRepository<T>)this.repositories[typeOfModel];
+        }
+
+
+        public int SaveChanges()
+        {
+            return this.context.SaveChanges();
         }
     }
 }

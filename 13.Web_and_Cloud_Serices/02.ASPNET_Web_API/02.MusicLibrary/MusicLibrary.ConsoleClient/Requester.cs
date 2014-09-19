@@ -48,6 +48,13 @@ namespace MusicLibrary.ConsoleClient
             JObject json = JObject.Parse(recievedString);
             return JsonObjectToString(json);
         }
+        public JObject ReadJSON(string controller, string id)
+        {
+            var recieved = client.GetAsync(BaseURL + controller + "/" + id).Result;
+            var recievedString = recieved.Content.ReadAsStringAsync().Result;
+            JObject json = JObject.Parse(recievedString);
+            return json;
+        }
         public string Delete(string controller, string id)
         {
             var recieved = client.DeleteAsync(BaseURL + controller + "/" + id).Result;

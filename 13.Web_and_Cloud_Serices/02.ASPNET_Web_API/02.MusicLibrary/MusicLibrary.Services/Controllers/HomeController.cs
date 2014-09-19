@@ -10,7 +10,7 @@ namespace MusicLibrary.Services.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Music Library";
 
             return View();
         }

@@ -5,13 +5,15 @@
 
     public interface IStudentSystemData
     {
-        IGenericRepository<Course> Courses { get; }
+        IRepository<Course> Courses { get; }
 
         StudentsRepository Students { get; }
 
-        IGenericRepository<Test> Tests { get; }
+        IRepository<Test> Tests { get; }
 
-        IGenericRepository<Homework> Homeworks { get; }
+        IRepository<Homework> Homeworks { get; }
+
+        int SaveChanges();
 
     }
 }

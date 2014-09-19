@@ -30,6 +30,7 @@
         public int Level { get; set; }
 
         public virtual Student Assistant { get; set; }
+        //public Student Assistant { get; set; }
 
         [InverseProperty("Assistant")]
         public virtual ICollection<Student> Trainees { get; set; }

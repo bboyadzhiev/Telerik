@@ -10,8 +10,9 @@ namespace MusicLibrary.Data
 {
     public interface IMusicLibraryData
     {
-        IGenericRepository<Album> Albums { get; set; }
-        IGenericRepository<Artist> Artists { get; set; }
-        IGenericRepository<Song> Songs { get; set; }
+        IRepository<Album> Albums { get; }
+        IRepository<Artist> Artists { get; }
+        IRepository<Song> Songs { get; }
+        int SaveChanges();
     }
 }

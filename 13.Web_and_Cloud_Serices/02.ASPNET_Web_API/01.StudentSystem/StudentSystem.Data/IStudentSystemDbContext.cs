@@ -18,6 +18,6 @@
 
         DbEntityEntry<T> Entry<T>(T entity) where T : class;
 
-        void SaveChanges();
+        int SaveChanges();
     }
 }

@@ -1,12 +1,13 @@
 ﻿namespace MusicLibrary.Data.Repositories
 {
-    
-using System.Linq;
-using MusicLibrary.Models;
 
-    public class AlbumsRepository : GenericRepository<Album>, IGenericRepository<Album>
+    using System.Data.Entity;
+    using System.Linq;
+    using MusicLibrary.Models;
+
+    public class AlbumsRepository : EFRepository<Album>, IRepository<Album>
     {
-        public AlbumsRepository(IMusicLibraryDbContext context)
+        public AlbumsRepository(DbContext context)
             : base(context)
         {
 

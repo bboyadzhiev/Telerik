@@ -64,10 +64,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MusicLibrary.Data\MusicLibrary.Data.csproj">
-      <Project>{221829a4-97fa-4cb4-a2a8-7899a93b234f}</Project>
-      <Name>MusicLibrary.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MusicLibrary.Models\MusicLibrary.Models.csproj">
       <Project>{8d9a8e5d-392a-4b05-a2dc-1daba1f79ae7}</Project>
       <Name>MusicLibrary.Models</Name>

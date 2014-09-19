@@ -17,7 +17,7 @@ namespace StudentSystem.Services.Models
         {
             get
             {
-                return x => new CourseModel { Id = x.Id, Name = x.Name, Description = x.Description };
+                return x => new CourseModel {Id = x.Id, Name = x.Name, Description = x.Description };
             }
         }
 

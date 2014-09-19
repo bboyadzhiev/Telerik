@@ -20,22 +20,38 @@ namespace StudentSystem.Services.Controllers
             this.data = new StudentSystemData();
         }
 
+        /// <summary>
+        /// Uploads a new Homework
+        /// </summary>
+        /// <param name="homeworkModel">The new homework</param>
+        /// <returns>Appropriate message</returns>
+                                   
         public HttpResponseMessage Post([FromBody]HomeworkModel homeworkModel)
         {
             var homework = homeworkModel.CreateHomework();
             this.data.Homeworks.Add(homework);
+            this.data.SaveChanges();
 
             var message = this.Request.CreateResponse(HttpStatusCode.Created);
             message.Headers.Location = new Uri(this.Request.RequestUri + homework.Id.ToString(CultureInfo.InvariantCulture));
             return message;
         }
 
+        /// <summary>
+        /// Gets all homeworks
+        /// </summary>
+        /// <returns>Appropriate message</returns>
         public IQueryable<HomeworkModel> Get()
         {
             var homeworks = this.data.Homeworks.All().Select(HomeworkModel.FromHomeworkCFModel);
             return homeworks;
         }
 
+        /// <summary>
+        /// Updates a Homework
+        /// </summary>
+        /// <param name="homeworkModel">The new homework</param>
+        /// <returns>Appropriate message</returns>
         public HttpResponseMessage Put([FromBody]HomeworkModel homeworkModel)
         {
             //var homework = this.homeworkData.Get(id);

@@ -26,7 +26,7 @@ namespace StudentSystem.Services.Controllers
         /// <returns>If successful retuns the assignment information</returns>
         public HttpResponseMessage Post(int trainerId, int studentId)
         {
-            var trainer = this.data.Students.All().Where(x => x.StudentIdentification == trainerId && x.IsAssistant).FirstOrDefault();
+            var trainer = this.data.Students.All().Where(x => x.StudentIdentification == trainerId).FirstOrDefault();
             var student = this.data.Students.All().Where(x => x.StudentIdentification == studentId).FirstOrDefault();
             if (trainer == null)
             {
@@ -37,17 +37,21 @@ namespace StudentSystem.Services.Controllers
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Student not found!");
             }
 
-            trainer.Trainees.Add(student);
+            //trainer.Trainees.Add(student);
+            //student.Assistant.StudentIdentification = trainer.StudentIdentification;
+            student.Assistant = trainer;
+            this.data.Students.SaveChanges();
 
             return this.Request.CreateResponse(HttpStatusCode.OK,
                 new
                 {
                     Assignment = new
                     {
-                        Trainer = trainer.FirstName + " " + trainer.LastName,
+                        Trainer = student.Assistant.FirstName + " " + student.Assistant.LastName,
                         Student = student.FirstName + " " + student.LastName
                     }
                 });
+
         }
 
         /// <summary>
@@ -58,8 +62,8 @@ namespace StudentSystem.Services.Controllers
         /// <returns>If successful retuns the un-assignment information</returns>
         public HttpResponseMessage Delete(int trainerId, int studentId)
         {
-            var trainer = this.data.Students.All().Where(x => x.StudentIdentification == trainerId && x.IsAssistant).FirstOrDefault();
-            if (trainer == null)
+            var trainer = this.data.Students.All().Where(x => x.StudentIdentification == trainerId).FirstOrDefault();
+            if (!trainer.IsAssistant)
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trainer not found!");
             }
@@ -70,6 +74,9 @@ namespace StudentSystem.Services.Controllers
             {
                 return this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "The student assigned to that trainer was not found!");
             }
+
+            student.Assistant = null;
+            this.data.Students.SaveChanges();
 
             return this.Request.CreateResponse(HttpStatusCode.OK,
                 new

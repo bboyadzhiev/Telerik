@@ -1,118 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
-using MusicLibrary.Models;
 using MusicLibrary.Data;
+using MusicLibrary.Services.Models;
 
 namespace MusicLibrary.Services.Controllers
 {
-    public class ArtistsController : ApiController
+    public class ArtistsController : ApiController, IRESTController<ArtistDataModel>
     {
-        private MusicLibraryDbContext db = new MusicLibraryDbContext();
-
-        // GET api/Artists
-        public IQueryable<Artist> GetArtists()
+        private IMusicLibraryData data;
+        public ArtistsController()
         {
-            return db.Artists;
+            this.data = new MusicLibraryData();
         }
 
-        // GET api/Artists/5
-        [ResponseType(typeof(Artist))]
-        public IHttpActionResult GetArtist(int id)
+        public IHttpActionResult Get()
         {
-            Artist artist = db.Artists.Find(id);
+            var artists = this.data.Artists.All().Select(ArtistDataModel.FromArtistEFModel);
+            return Ok(artists);
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            var artist = this.data.Artists.All().Where(x => x.Id == id).Select(ArtistDataModel.FromArtistEFModel).FirstOrDefault();
+            if (artist == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(artist);
+        }
+        public IHttpActionResult Post([FromBody]ArtistDataModel artistModel)
+        {
+            var artist = artistModel.CreateArtist();
+            data.Artists.Add(artist);
+            data.SaveChanges();
+            return Ok(artistModel);
+        }
+
+        public IHttpActionResult Put([FromBody]ArtistDataModel artistModel)
+        {
+            var artist = this.data.Artists.All().Where(x => x.Id == artistModel.Id).FirstOrDefault();
             if (artist == null)
             {
                 return NotFound();
             }
 
-            return Ok(artist);
+            artistModel.UpdateArtist(artist);
+            this.data.SaveChanges();
+            return Ok(artistModel);
         }
 
-        // PUT api/Artists/5
-        public IHttpActionResult PutArtist(int id, Artist artist)
+
+        public IHttpActionResult Delete(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != artist.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(artist).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArtistExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST api/Artists
-        [ResponseType(typeof(Artist))]
-        public IHttpActionResult PostArtist(Artist artist)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Artists.Add(artist);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = artist.Id }, artist);
-        }
-
-        // DELETE api/Artists/5
-        [ResponseType(typeof(Artist))]
-        public IHttpActionResult DeleteArtist(int id)
-        {
-            Artist artist = db.Artists.Find(id);
+            var artist = this.data.Artists.All().Where(x => x.Id == id).FirstOrDefault();
             if (artist == null)
             {
                 return NotFound();
             }
 
-            db.Artists.Remove(artist);
-            db.SaveChanges();
+            this.data.Artists.Delete(id);
+            this.data.SaveChanges();
 
-            return Ok(artist);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ArtistExists(int id)
-        {
-            return db.Artists.Count(e => e.Id == id) > 0;
+            return Ok();
         }
     }
 }
