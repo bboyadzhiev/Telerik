@@ -1,6 +1,5 @@
 ﻿namespace MusicLibrary.Data.Repositories
 {
-
     using System.Data.Entity;
     using System.Linq;
     using MusicLibrary.Models;
@@ -10,7 +9,6 @@
         public AlbumsRepository(DbContext context)
             : base(context)
         {
-
         }
 
         public IQueryable<Album> AllArtists()

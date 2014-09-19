@@ -1,29 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MusicLibrary.Models;
-using Newtonsoft.Json.Linq;
-
-using System.Net;
-using System.Net.Http;
-
-
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Net.Http.Headers;
-
-using System.Runtime.Serialization;
-
-namespace MusicLibrary.ConsoleClient
+﻿namespace MusicLibrary.ConsoleClient
 {
-    static class Program
+    using System;
+    using System.Collections.Generic;
+    using MusicLibrary.Models;
+    using Newtonsoft.Json.Linq;
+
+    internal static class Program
     {
-        static string baseUrl = "http://localhost:4196/api";
+        private static string baseUrl = "http://localhost:4196/api";
+        private const string ARTISTS = "/artists";
+        private const string ALBUMS = "/albums";
+        private const string SONGS = "/songs";
 
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             string inputLine = "";
 
@@ -43,16 +32,15 @@ namespace MusicLibrary.ConsoleClient
 
                 PrintEndOperationsCycle();
             }
-
-
         }
-        static void ExecuteMenuChoice(string inputChoice, Requester reqConsumer)
+
+        private static void ExecuteMenuChoice(string inputChoice, Requester reqConsumer)
         {
             switch (inputChoice)
             {
                 case "1":
                     {
-                        string controller = "/artists";
+                        string controller = ARTISTS;
                         PrintCurrentPath(controller);
 
                         PrintCRUDOperationsChoices();
@@ -61,9 +49,10 @@ namespace MusicLibrary.ConsoleClient
                         ExecuteCRUDChoice(inputChoice, reqConsumer, controller, EnterArtist, UpdateArtist);
                     }
                     break;
+
                 case "2":
                     {
-                        string controller = "/albums";
+                        string controller = ALBUMS;
 
                         PrintCurrentPath(controller);
 
@@ -75,7 +64,7 @@ namespace MusicLibrary.ConsoleClient
                     } break;
                 case "3":
                     {
-                        string controller = "/songs";
+                        string controller = SONGS;
 
                         PrintCurrentPath(controller);
 
@@ -90,7 +79,7 @@ namespace MusicLibrary.ConsoleClient
             }
         }
 
-        static void ExecuteCRUDChoice(string inputChoice, Requester reqConsumer, string controller,
+        private static void ExecuteCRUDChoice(string inputChoice, Requester reqConsumer, string controller,
             Func<Requester, string, string> CreateEntry, Func<Requester, string, string> UpdateEntry)
         {
             switch (inputChoice)
@@ -101,18 +90,21 @@ namespace MusicLibrary.ConsoleClient
                         Console.WriteLine(sent);
                     }
                     break;
+
                 case "2":
                     {
                         var recieved = reqConsumer.Read(controller);
                         Console.WriteLine(recieved);
                     }
                     break;
+
                 case "3":
                     {
                         var recieved = UpdateEntry(reqConsumer, controller);
                         Console.WriteLine(recieved);
                     }
                     break;
+
                 case "4":
                     {
                         Console.Write("Enter id: ");
@@ -121,6 +113,7 @@ namespace MusicLibrary.ConsoleClient
                         Console.WriteLine("Deleted: \n{0}", recieved);
                     }
                     break;
+
                 case "5":
                     {
                         Console.Write("Enter id: ");
@@ -129,13 +122,15 @@ namespace MusicLibrary.ConsoleClient
                         Console.WriteLine(recieved);
                     }
                     break;
+
                 default: Console.WriteLine("Error, incorrect digit."); break;
             }
         }
 
         private static string UpdateArtist(Requester reqConsumer, string controller)
         {
-            var oldArtist = GetArtistById(reqConsumer);
+            //var oldArtist = GetArtistById(reqConsumer);
+            Artist oldArtist = GetById<Artist>(reqConsumer, ARTISTS);
             Console.Write("Enter new name: ");
             string name = Console.ReadLine();
             Console.Write("Enter new country(optional): ");
@@ -148,7 +143,6 @@ namespace MusicLibrary.ConsoleClient
             }
             catch (FormatException ex)
             {
-
             }
 
             Artist newArtist = new Artist()
@@ -187,7 +181,6 @@ namespace MusicLibrary.ConsoleClient
             }
             catch (FormatException ex)
             {
-
             }
 
             Artist newArtist = CreateArtistObject(name, country, date);
@@ -220,7 +213,6 @@ namespace MusicLibrary.ConsoleClient
 
         private static string EnterAlbum(Requester reqConsumer, string controller)
         {
-
             Console.WriteLine("Enter title: ");
             string title = Console.ReadLine();
             Console.WriteLine("Enter producer(optional): ");
@@ -233,32 +225,33 @@ namespace MusicLibrary.ConsoleClient
             }
             catch (FormatException ex)
             {
-
             }
             var artists = new List<Artist>();
             Artist artist;
             do
             {
-                artist = GetArtistById(reqConsumer);
+                //artist = GetArtistById(reqConsumer);
+                artist = GetById<Artist>(reqConsumer, ARTISTS);
                 artists.Add(artist);
             } while (artist != null);
 
             if (artists.Count == 0)
             {
-                return "Every album must have at least one artist";
+                return "Every album must have at least one artist!";
             }
 
             var songs = new List<Song>();
             Song song;
             do
             {
-                song = GetSongById(reqConsumer);
+                //song = GetSongById(reqConsumer);
+                song = GetById<Song>(reqConsumer, SONGS);
                 songs.Add(song);
             } while (songs != null);
 
             if (songs.Count == 0)
             {
-                return "Every album must have at least one song";
+                return "Every album must have at least one song!";
             }
 
             var newAlbum = new Album()
@@ -286,7 +279,8 @@ namespace MusicLibrary.ConsoleClient
 
         private static string UpdateAlbum(Requester reqConsumer, string controller)
         {
-            var oldAlbum = GetAlbumById(reqConsumer);
+            //var oldAlbum = GetAlbumById(reqConsumer);
+            var oldAlbum = GetById<Album>(reqConsumer, ALBUMS);
             Console.WriteLine("Enter new title: ");
             string title = Console.ReadLine();
             Console.WriteLine("Enter new producer: ");
@@ -299,13 +293,13 @@ namespace MusicLibrary.ConsoleClient
             }
             catch (FormatException ex)
             {
-
             }
             var artists = new List<Artist>();
             Artist artist;
             do
             {
-                artist = GetArtistById(reqConsumer);
+                //artist = GetArtistById(reqConsumer);
+                artist = GetById<Artist>(reqConsumer, ARTISTS);
                 artists.Add(artist);
             } while (artist != null);
 
@@ -318,7 +312,8 @@ namespace MusicLibrary.ConsoleClient
             Song song;
             do
             {
-                song = GetSongById(reqConsumer);
+                //song = GetSongById(reqConsumer);
+                song = GetById<Song>(reqConsumer, SONGS);
                 songs.Add(song);
             } while (songs != null);
 
@@ -336,7 +331,6 @@ namespace MusicLibrary.ConsoleClient
                  Artists = artists,
                  Songs = songs
              };
-
 
             Console.WriteLine("As Json(1) Or XML(2)? ");
             string choice = Console.ReadLine();
@@ -368,10 +362,10 @@ namespace MusicLibrary.ConsoleClient
             }
             catch (Exception ex)
             {
-
             }
-            Console.WriteLine("Add artist by id.");
-            var artist = GetArtistById(reqConsumer);
+            Console.WriteLine("Add artist");
+            //var artist = GetArtistById(reqConsumer);
+            var artist = GetById<Artist>(reqConsumer, ARTISTS);
             if (artist == null)
             {
                 return "Artist cannot be null - ABORTING";
@@ -383,7 +377,6 @@ namespace MusicLibrary.ConsoleClient
                 Year = releaseDate,
                 ArtistId = artist.Id
             };
-
 
             Console.WriteLine("As Json(1) Or XML(2)? ");
             string choice = Console.ReadLine();
@@ -401,12 +394,13 @@ namespace MusicLibrary.ConsoleClient
 
         private static string UpdateSong(Requester reqConsumer, string controller)
         {
-            var oldSong = GetSongById(reqConsumer);
+            //var oldSong = GetSongById(reqConsumer);
+            var oldSong = GetById<Song>(reqConsumer, SONGS);
             Console.Write("Enter new title: ");
             string title = Console.ReadLine();
-            Console.Write("Enter new genre(optional): ");
+            Console.Write("Enter new genre: ");
             string genreString = Console.ReadLine();
-            Console.Write("Enter new release date(optional): ");
+            Console.Write("Enter new release date: ");
             DateTime releaseDate = DateTime.Now;
             Genre genre = Genre.Undefined;
             try
@@ -416,12 +410,13 @@ namespace MusicLibrary.ConsoleClient
             }
             catch (FormatException ex)
             {
-
             }
 
-            Console.WriteLine("Add artist by id.");
-            var artist = GetArtistById(reqConsumer);
-            if (artist == null)
+            Console.WriteLine("Add artist");
+
+            //var artist = GetArtistById(reqConsumer);
+            var artist = GetById<Artist>(reqConsumer, ARTISTS);
+            if (String.IsNullOrEmpty(artist.Name))
             {
                 return "Artist cannot be null - ABORTING";
             }
@@ -448,16 +443,93 @@ namespace MusicLibrary.ConsoleClient
             }
         }
 
+        // TODO WebAPI Controllers update is needed for this
+        private static T GetByName<T>(Requester reqConsumer, string endpoint) where T : class
+        {
+            Console.Write("Enter name/title:");
+            string entityName = Console.ReadLine();
+            if (String.IsNullOrEmpty(entityName))
+            {
+                Console.WriteLine("Aborting search!");
+                return null;
+            }
+
+            JObject jEntity = reqConsumer.ReadJobject(endpoint, entityName);
+            JToken checkEntity;
+            if (jEntity.TryGetValue("Name", out checkEntity) || jEntity.TryGetValue("Title", out checkEntity))
+            {
+                var entity = jEntity.ToObject<T>();
+                if (entity.GetType() == typeof(Artist))
+                {
+                    var artist = entity as Artist;
+                    Console.WriteLine("Artist found: {0}", artist.Name);
+                    return entity;
+                }
+                if (entity.GetType() == typeof(Song))
+                {
+                    var song = entity as Song;
+                    Console.WriteLine("Song found: {0}", song.Title);
+                    return entity;
+                }
+                if (entity.GetType() == typeof(Album))
+                {
+                    var album = entity as Album;
+                    Console.WriteLine("Album found: {0}", album.Title);
+                    return entity;
+                }
+                return default(T);
+            }
+            Console.WriteLine("Not found!");
+
+            return default(T);
+        }
+
+        private static T GetById<T>(Requester reqConsumer, string endpoint)
+        {
+            Console.Write("Enter id:");
+            string entityId = Console.ReadLine();
+            if (String.IsNullOrEmpty(entityId))
+            {
+                Console.WriteLine("Aborting search!");
+                return default(T);
+            }
+            JObject jEntity = reqConsumer.ReadJobject(endpoint, entityId);
+            JToken checkEntity;
+            if (jEntity.TryGetValue("Id", out checkEntity))
+            {
+                var entity = jEntity.ToObject<T>();
+                if (entity.GetType() == typeof(Artist))
+                {
+                    var artist = entity as Artist;
+                    Console.WriteLine("Artist found: {0}", artist.Name);
+                }
+                if (entity.GetType() == typeof(Song))
+                {
+                    var song = entity as Song;
+                    Console.WriteLine("Song found: {0}", song.Title);
+                }
+                if (entity.GetType() == typeof(Album))
+                {
+                    var album = entity as Album;
+                    Console.WriteLine("Album found: {0}", album.Title);
+                }
+                return entity;
+            }
+            Console.WriteLine("Not found!");
+            return default(T);
+        }
+
         private static Artist GetArtistById(Requester reqConsumer)
         {
             Console.Write("Enter an Artist id: ");
             var artistId = Console.ReadLine();
+
             if (String.IsNullOrEmpty(artistId))
             {
                 Console.WriteLine("Aborting search!");
                 return null;
             }
-            JObject jArtist = reqConsumer.ReadJSON("/artists", artistId);
+            JObject jArtist = reqConsumer.ReadJobject(ARTISTS, artistId);
             JToken checkId;
             if (jArtist.TryGetValue("Id", out checkId))
             {
@@ -478,7 +550,7 @@ namespace MusicLibrary.ConsoleClient
                 Console.WriteLine("Aborting search!");
                 return null;
             }
-            JObject jSong = reqConsumer.ReadJSON("/songs", songId);
+            JObject jSong = reqConsumer.ReadJobject(SONGS, songId);
             JToken checkId;
             if (jSong.TryGetValue("Id", out checkId))
             {
@@ -499,7 +571,7 @@ namespace MusicLibrary.ConsoleClient
                 Console.WriteLine("Aborting search!");
                 return null;
             }
-            JObject jAlbum = reqConsumer.ReadJSON("/albums", albumId);
+            JObject jAlbum = reqConsumer.ReadJobject(ALBUMS, albumId);
             JToken checkId;
             if (jAlbum.TryGetValue("Id", out checkId))
             {
@@ -511,7 +583,7 @@ namespace MusicLibrary.ConsoleClient
             return null;
         }
 
-        static string PrintCurrentPath(string controller)
+        private static string PrintCurrentPath(string controller)
         {
             string path = baseUrl + controller;
             Console.WriteLine(path);
@@ -519,17 +591,17 @@ namespace MusicLibrary.ConsoleClient
             return path;
         }
 
-        static void PrintMenu()
+        private static void PrintMenu()
         {
             Console.WriteLine("Enter corresponding number for each option:\n1. Artist\n2. Album\n3. Song\n4. End");
         }
 
-        static void PrintCRUDOperationsChoices()
+        private static void PrintCRUDOperationsChoices()
         {
             Console.WriteLine("1. Create\n2. Read\n3. Update\n4. Delete\n5. Read with Id");
         }
 
-        static void PrintEndOperationsCycle()
+        private static void PrintEndOperationsCycle()
         {
             Console.WriteLine("\n========================\n");
         }

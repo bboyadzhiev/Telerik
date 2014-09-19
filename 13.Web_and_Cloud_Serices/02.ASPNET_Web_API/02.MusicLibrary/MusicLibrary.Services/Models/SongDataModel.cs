@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
-using MusicLibrary.Models;
-
-namespace MusicLibrary.Services.Models
+﻿namespace MusicLibrary.Services.Models
 {
+    using System;
+    using System.Linq.Expressions;
+    using MusicLibrary.Models;
+
     public class SongDataModel
     {
         public int Id { get; set; }
+
         public string Title { get; set; }
+
         public DateTime Year { get; set; }
+
         public Genre Genre { get; set; }
+
         public int ArtistId { get; set; }
 
         public static Expression<Func<Song, SongDataModel>> FromSongEFModel
@@ -46,20 +47,20 @@ namespace MusicLibrary.Services.Models
         {
             if (this.Title != null)
             {
-                this.Title = song.Title;
+                song.Title = this.Title;
             }
 
             if (this.Year != null)
             {
-                this.Year = song.Year;
+                song.Year = this.Year;
             }
             if (this.Genre != null)
             {
-                this.Genre = song.Genre;
+                song.Genre = this.Genre;
             }
             if (this.ArtistId != null)
             {
-                this.ArtistId = song.ArtistId;
+                song.ArtistId = this.ArtistId;
             }
         }
     }

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using MusicLibrary.Data;
-using MusicLibrary.Services.Models;
-
-namespace MusicLibrary.Services.Controllers
+﻿namespace MusicLibrary.Services.Controllers
 {
+    using System.Linq;
+    using System.Web.Http;
+    using MusicLibrary.Data;
+    using MusicLibrary.Services.Models;
+
     public class ArtistsController : ApiController, IRESTController<ArtistDataModel>
     {
         private IMusicLibraryData data;
+
         public ArtistsController()
         {
             this.data = new MusicLibraryData();
@@ -30,9 +27,10 @@ namespace MusicLibrary.Services.Controllers
             {
                 return NotFound();
             }
-            
+
             return Ok(artist);
         }
+
         public IHttpActionResult Post([FromBody]ArtistDataModel artistModel)
         {
             var artist = artistModel.CreateArtist();
@@ -54,10 +52,10 @@ namespace MusicLibrary.Services.Controllers
             return Ok(artistModel);
         }
 
-
         public IHttpActionResult Delete(int id)
         {
             var artist = this.data.Artists.All().Where(x => x.Id == id).FirstOrDefault();
+            var artistModel = this.data.Artists.All().Where(x => x.Id == id).Select(ArtistDataModel.FromArtistEFModel).FirstOrDefault();
             if (artist == null)
             {
                 return NotFound();
@@ -66,7 +64,7 @@ namespace MusicLibrary.Services.Controllers
             this.data.Artists.Delete(id);
             this.data.SaveChanges();
 
-            return Ok();
+            return Ok(artistModel);
         }
     }
 }

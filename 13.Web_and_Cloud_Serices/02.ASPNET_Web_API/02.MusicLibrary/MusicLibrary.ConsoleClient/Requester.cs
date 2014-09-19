@@ -1,39 +1,35 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
-using System.Xml.Serialization;
-using System.Net.Http.Formatting;
-
-namespace MusicLibrary.ConsoleClient
+﻿namespace MusicLibrary.ConsoleClient
 {
-    class Requester
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using Newtonsoft.Json.Linq;
+
+    internal class Requester
     {
-        static HttpClient client = new HttpClient();
-        
-        
+        private static HttpClient client = new HttpClient();
+
         public Requester(string baseUrl)
         {
             this.BaseURL = baseUrl;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
         private string BaseURL { get; set; }
+
         public string CreateAsJson<T>(T obj, string controller)
         {
             var sent = client.PostAsJsonAsync<T>(BaseURL + controller, obj).Result;
             //var asd =
             return sent.Content.ReadAsStringAsync().Result;
         }
+
         public string CreateAsXML<T>(T obj, string controller)
         {
             var sent = client.PostAsXmlAsync<T>(BaseURL + controller, obj).Result;
             return sent.Content.ReadAsStringAsync().Result;
         }
+
         public string Read(string controller)
         {
             var recieved = client.GetAsync(BaseURL + controller).Result;
@@ -41,6 +37,7 @@ namespace MusicLibrary.ConsoleClient
             JArray jsonArray = JArray.Parse(recievedString);
             return JsonArrayToString(jsonArray);
         }
+
         public string Read(string controller, string id)
         {
             var recieved = client.GetAsync(BaseURL + controller + "/" + id).Result;
@@ -48,13 +45,15 @@ namespace MusicLibrary.ConsoleClient
             JObject json = JObject.Parse(recievedString);
             return JsonObjectToString(json);
         }
-        public JObject ReadJSON(string controller, string id)
+
+        public JObject ReadJobject(string controller, string id)
         {
             var recieved = client.GetAsync(BaseURL + controller + "/" + id).Result;
             var recievedString = recieved.Content.ReadAsStringAsync().Result;
             JObject json = JObject.Parse(recievedString);
             return json;
         }
+
         public string Delete(string controller, string id)
         {
             var recieved = client.DeleteAsync(BaseURL + controller + "/" + id).Result;
@@ -62,18 +61,21 @@ namespace MusicLibrary.ConsoleClient
             JObject json = JObject.Parse(recievedString);
             return JsonObjectToString(json);
         }
+
         public string UpdateAsJson<T>(T obj, string controller, string id)
         {
             string reqURL = BaseURL + controller + "/" + id;
             var sent = client.PutAsJsonAsync<T>(reqURL, obj).Result;
             return sent.Content.ReadAsStringAsync().Result;
         }
+
         public string UpdateAsXML<T>(T obj, string controller, string id)
         {
             string reqURL = BaseURL + controller + "/" + id;
             var sent = client.PutAsXmlAsync<T>(reqURL, obj).Result;
             return sent.Content.ReadAsStringAsync().Result;
         }
+
         private static string JsonObjectToString(JObject obj)
         {
             StringBuilder resultBuilder = new StringBuilder();
@@ -85,6 +87,7 @@ namespace MusicLibrary.ConsoleClient
             resultBuilder.AppendLine(" }");
             return resultBuilder.ToString();
         }
+
         private static string JsonArrayToString(JArray jsonArray)
         {
             StringBuilder resultBuilder = new StringBuilder();

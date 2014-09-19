@@ -1,7 +1,6 @@
 namespace MusicLibrary.Data.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using MusicLibrary.Models;
@@ -19,8 +18,8 @@ namespace MusicLibrary.Data.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.    
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data. E.g.
             this.SeedArtists(context);
             context.SaveChanges();
             this.SeedSongs(context);
@@ -40,7 +39,6 @@ namespace MusicLibrary.Data.Migrations
                 Name = "Michael Jackson",
                 Country = "USA",
                 DateOfBirth = DateTime.Now
-
             });
 
             context.Artists.Add(new Artist
@@ -91,6 +89,7 @@ namespace MusicLibrary.Data.Migrations
                           }
                 );
         }
+
         private void SeedAlbums(MusicLibraryDbContext ctx)
         {
             if (ctx.Albums.Any())

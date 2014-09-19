@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MusicLibrary.Data.Migrations;
-using MusicLibrary.Models;
-
-namespace MusicLibrary.Data
+﻿namespace MusicLibrary.Data
 {
+    using System.Data.Entity;
+    using MusicLibrary.Data.Migrations;
+    using MusicLibrary.Models;
+
     public class MusicLibraryDbContext : DbContext, IMusicLibraryDbContext
     {
         public MusicLibraryDbContext()
@@ -16,6 +11,7 @@ namespace MusicLibrary.Data
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicLibraryDbContext, Configuration>());
         }
+
         public MusicLibraryDbContext(string connectionString)
             : base("MusicLibrary")
         {
@@ -24,8 +20,11 @@ namespace MusicLibrary.Data
         }
 
         public IDbSet<Artist> Artists { get; set; }
+
         public IDbSet<Song> Songs { get; set; }
+
         public IDbSet<Album> Albums { get; set; }
+
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
@@ -33,8 +32,7 @@ namespace MusicLibrary.Data
 
         public new int SaveChanges()
         {
-           return base.SaveChanges();
+            return base.SaveChanges();
         }
-
     }
 }

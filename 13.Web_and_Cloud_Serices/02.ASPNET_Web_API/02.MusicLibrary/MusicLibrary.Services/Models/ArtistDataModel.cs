@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
-using MusicLibrary.Models;
-
-namespace MusicLibrary.Services.Models
+﻿namespace MusicLibrary.Services.Models
 {
+    using System;
+    using System.Linq.Expressions;
+    using MusicLibrary.Models;
+
     public class ArtistDataModel
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public string Country { get; set; }
+
         public DateTime DateOfBirth { get; set; }
 
         public static Expression<Func<Artist, ArtistDataModel>> FromArtistEFModel
@@ -20,7 +20,10 @@ namespace MusicLibrary.Services.Models
             {
                 return x => new ArtistDataModel
                 {
-                  Id = x.Id, Name = x.Name, Country = x.Country, DateOfBirth = x.DateOfBirth
+                    Id = x.Id,
+                    Name = x.Name,
+                    Country = x.Country,
+                    DateOfBirth = x.DateOfBirth
                 };
             }
         }
@@ -29,7 +32,10 @@ namespace MusicLibrary.Services.Models
         {
             return new Artist
             {
-              Id = this.Id, Name = this.Name, Country = this.Country, DateOfBirth = this.DateOfBirth
+                Id = this.Id,
+                Name = this.Name,
+                Country = this.Country,
+                DateOfBirth = this.DateOfBirth
             };
         }
 
@@ -37,18 +43,17 @@ namespace MusicLibrary.Services.Models
         {
             if (this.Name != null)
             {
-                this.Name = artist.Name;
+                artist.Name = this.Name;
             }
 
             if (this.Country != null)
             {
-                this.Country = artist.Country;
+                artist.Country = this.Country;
             }
             if (this.DateOfBirth != null)
             {
-                this.DateOfBirth = artist.DateOfBirth;
+                artist.DateOfBirth = this.DateOfBirth;
             }
-
         }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MusicLibrary.Data.Repositories;
-using MusicLibrary.Models;
-
-namespace MusicLibrary.Data
+﻿namespace MusicLibrary.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using MusicLibrary.Data.Repositories;
+    using MusicLibrary.Models;
+
     public class MusicLibraryData : IMusicLibraryData
     {
         public IMusicLibraryDbContext context;
@@ -16,13 +13,11 @@ namespace MusicLibrary.Data
         public MusicLibraryData()
             : this(new MusicLibraryDbContext())
         {
-
         }
 
         public MusicLibraryData(string connectionString)
             : this(new MusicLibraryDbContext(connectionString))
         {
-
         }
 
         public MusicLibraryData(IMusicLibraryDbContext context)
@@ -72,7 +67,6 @@ namespace MusicLibrary.Data
 
             return (IRepository<T>)this.repositories[typeOfModel];
         }
-
 
         public int SaveChanges()
         {
