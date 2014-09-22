@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using MusicLibrary.Models;
     using Newtonsoft.Json.Linq;
+   
 
     internal static class Program
     {
@@ -21,13 +22,13 @@
             while (true)
             {
                 PrintMenu();
+                Console.Write("Choice: ");
                 inputLine = Console.ReadLine().ToLower();
 
                 if (inputLine == "4")
                 {
                     break;
                 }
-
                 ExecuteMenuChoice(inputLine, reqConsumer);
 
                 PrintEndOperationsCycle();
@@ -227,27 +228,41 @@
             {
             }
             var artists = new List<Artist>();
+            var artistIds = new List<int>();
             Artist artist;
             do
             {
+                Console.WriteLine("Add atuhor by ID:");
                 //artist = GetArtistById(reqConsumer);
                 artist = GetById<Artist>(reqConsumer, ARTISTS);
-                artists.Add(artist);
+                if (artist != null)
+                {
+
+                    artists.Add(artist);
+                    artistIds.Add(artist.Id);
+                }
+
             } while (artist != null);
 
-            if (artists.Count == 0)
+            if (artistIds.Count == 0)
             {
                 return "Every album must have at least one artist!";
             }
 
+            var songIds = new List<int>();
             var songs = new List<Song>();
             Song song;
             do
             {
+                Console.WriteLine("Add song by ID:");
                 //song = GetSongById(reqConsumer);
                 song = GetById<Song>(reqConsumer, SONGS);
-                songs.Add(song);
-            } while (songs != null);
+                if (song != null)
+                {
+                    songs.Add(song);
+                    songIds.Add(song.Id);
+                }
+            } while (song != null);
 
             if (songs.Count == 0)
             {
@@ -295,12 +310,20 @@
             {
             }
             var artists = new List<Artist>();
+            var artistIds = new List<int>();
             Artist artist;
             do
             {
+                Console.WriteLine("Add atuhor by ID:");
                 //artist = GetArtistById(reqConsumer);
                 artist = GetById<Artist>(reqConsumer, ARTISTS);
-                artists.Add(artist);
+                if (artist != null)
+                {
+
+                    artists.Add(artist);
+                    artistIds.Add(artist.Id);
+                }
+
             } while (artist != null);
 
             if (artists.Count == 0)
@@ -308,14 +331,20 @@
                 return "Every album must have at least one artist";
             }
 
+            var songIds = new List<int>();
             var songs = new List<Song>();
             Song song;
             do
             {
+                Console.WriteLine("Add song by ID:");
                 //song = GetSongById(reqConsumer);
                 song = GetById<Song>(reqConsumer, SONGS);
-                songs.Add(song);
-            } while (songs != null);
+                if (song != null)
+                {
+                    songs.Add(song);
+                    songIds.Add(song.Id);
+                }
+            } while (song != null);
 
             if (songs.Count == 0)
             {
@@ -486,11 +515,11 @@
 
         private static T GetById<T>(Requester reqConsumer, string endpoint)
         {
-            Console.Write("Enter id:");
+            Console.Write("Enter id: ");
             string entityId = Console.ReadLine();
             if (String.IsNullOrEmpty(entityId))
             {
-                Console.WriteLine("Aborting search!");
+                Console.WriteLine("ID not found!");
                 return default(T);
             }
             JObject jEntity = reqConsumer.ReadJobject(endpoint, entityId);

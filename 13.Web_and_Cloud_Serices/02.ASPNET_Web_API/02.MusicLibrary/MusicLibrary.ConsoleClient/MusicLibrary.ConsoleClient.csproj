@@ -68,6 +68,10 @@
       <Project>{8d9a8e5d-392a-4b05-a2dc-1daba1f79ae7}</Project>
       <Name>MusicLibrary.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MusicLibrary.Services\MusicLibrary.Services.csproj">
+      <Project>{e11baae5-cbce-444c-92d3-0fdda4ad3482}</Project>
+      <Name>MusicLibrary.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
