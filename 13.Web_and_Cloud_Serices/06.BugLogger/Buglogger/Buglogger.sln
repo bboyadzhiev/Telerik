@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugLogger.Models", "BugLogger.Models\BugLogger.Models.csproj", "{B38AF45A-C727-47B2-BB80-2513ECC97DAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugLogger.Data", "BugLogger.Data\BugLogger.Data.csproj", "{DCFCCBBF-1B14-4F07-9BA7-AA28344445DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugLogger.WebApi", "BugLogger.WebApi\BugLogger.WebApi.csproj", "{918AC92C-6464-45B9-AD37-B08B5E6D9F78}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B38AF45A-C727-47B2-BB80-2513ECC97DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38AF45A-C727-47B2-BB80-2513ECC97DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38AF45A-C727-47B2-BB80-2513ECC97DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38AF45A-C727-47B2-BB80-2513ECC97DAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFCCBBF-1B14-4F07-9BA7-AA28344445DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFCCBBF-1B14-4F07-9BA7-AA28344445DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFCCBBF-1B14-4F07-9BA7-AA28344445DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFCCBBF-1B14-4F07-9BA7-AA28344445DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918AC92C-6464-45B9-AD37-B08B5E6D9F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918AC92C-6464-45B9-AD37-B08B5E6D9F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918AC92C-6464-45B9-AD37-B08B5E6D9F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918AC92C-6464-45B9-AD37-B08B5E6D9F78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
