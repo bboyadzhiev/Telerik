@@ -1,12 +1,18 @@
 ﻿namespace TicTacToe.GameLogic
 {
+    using System;
+    using System.Text;
+    using System.Collections;
+    using System.Linq;
     public class GameResultValidator : IGameResultValidator
     {
+        private const string ValidCharacters = "XO-";
         // O-X  
         // O-X
         // --X
         public GameResult GetResult(string board)
         {
+            CheckBoardIntegrity(board);
             var result = CheckRows(board);
 
             if (result == GameResult.NotFinished || result == GameResult.Draw)
@@ -20,6 +26,25 @@
             }
 
             return result;
+        }
+
+        public void CheckBoardIntegrity(string board)
+        {
+            if (!board.All(c => ValidCharacters.Contains(c)) || board.Length != 9)
+            {
+                throw new ArgumentException("Invalid board description!");
+            }
+
+            int xes = board.Count(c => c == 'X');
+            int oes = board.Count(c => c == 'O');
+            if (xes>oes && xes-oes > 1)
+            {
+                throw new ArgumentException("Invalid board!");
+            }
+            if (oes > xes && oes - xes > 1)
+            {
+                throw new ArgumentException("Invalid board!");
+            }
         }
 
         private static GameResult CheckRows(string board)
