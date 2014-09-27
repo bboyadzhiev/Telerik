@@ -17,5 +17,7 @@
         }
 
         public int Age { get; set; }
+        public int WinsCount { get; set; }
+        public int LossesCount { get; set; }
     }
 }

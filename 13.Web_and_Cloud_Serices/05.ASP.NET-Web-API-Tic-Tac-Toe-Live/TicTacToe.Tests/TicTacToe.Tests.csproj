@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="PlayActionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameResultValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
