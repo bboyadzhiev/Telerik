@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="_02.Number_of_clicks.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_02.Number_of_clicks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock TextWrapping="Wrap" 
+                   x:Name="clicksCounterTextBox"
+                   Text="Click 100 times on the button to claim your prize!"
+                   VerticalAlignment="Top" 
+                   Height="126"
+                   Margin="10,10,10,0" FontSize="20"
+                   />
+        <Button Content="Click here!" 
+                x:Name="clickHereButton"
+                Tapped="clickHereButton_Tapped"
+                HorizontalAlignment="Left" 
+                Margin="10,131,0,0" 
+                VerticalAlignment="Top" Height="109" Width="159"/>
+
+    </Grid>
+</Page>

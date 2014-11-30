@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="_01.TextBox.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_01.TextBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+      
+        <TextBox 
+            Name="textBox"
+            HorizontalAlignment="Left" 
+                 Margin="10,10,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="This is a sample for you to select :)" 
+                 VerticalAlignment="Top"
+                 SelectionChanged="TextBox_SelectionChanged" Width="380" Height="122"/>
+        <TextBlock HorizontalAlignment="Left" 
+                   Name="selectionResultTextBlock"
+                   Margin="10,137,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="Select some text from above..."
+                   VerticalAlignment="Top"
+                   FontSize="25"
+                    Width="380" Height="493"/>
+    </Grid>
+</Page>
